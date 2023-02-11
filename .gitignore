@@ -7,6 +7,8 @@ __pycache__/
 *.so
 
 .idea
+allure-results
+allure-reports
 
 # Distribution / packaging
 .Python

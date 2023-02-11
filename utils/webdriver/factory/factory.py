@@ -19,8 +19,7 @@ def build_from_config(config: UIConfig) -> WebDriver:
     }
 
     if remote_url:
-        # version is passed in as {"browserVersion": version} in capabilities
-        return build_remote(browser, remote_url, build_config)
+        return build_remote(browser, remote_url, **build_config)
 
     # Start with SeleniumWire drivers
     # Set fields for the rest of the non-remote drivers

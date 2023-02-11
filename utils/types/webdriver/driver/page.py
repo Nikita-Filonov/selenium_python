@@ -54,11 +54,11 @@ class PageInterface(ABC):
         ...
 
     @abstractmethod
-    def get_xpath(self, xpath: str, timeout: int = None) -> ElementInterface:
+    def get_xpath(self, xpath: str, timeout: int = None) -> "ElementInterface":
         ...
 
     @abstractmethod
-    def find_xpath(self, xpath: str, timeout: int = None) -> ElementsInterface:
+    def find_xpath(self, xpath: str, timeout: int = None) -> "ElementsInterface":
         ...
 
     @abstractmethod

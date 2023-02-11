@@ -1,14 +1,21 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, BaseSettings, Field
 
 from utils.webdriver.factory.browser import Browser
 
 
-class DriverConfig(BaseModel):
-    browser: Browser = Browser.CHROME
-    remote_url: str = ""
+class DriverConfig(BaseSettings):
+    browser: Browser = Field(default=Browser.CHROME, env="BROWSER")
+    remote_url: str = Field(default="", env="REMOTE_URL")
     wait_time: int = 10
     page_load_wait_time: int = 0
-    options: list[str] = []
+    options: list[str] = [
+        "ignore-certificate-errors",
+        "--no-sandbox",
+        "disable-infobars",
+        '--headless',
+        '--disable-extensions',
+        '--disable-gpu'
+    ]
     capabilities: dict[str, str] = {}
     experimental_options: list[dict] | None = None
     seleniumwire_options: dict = {}
@@ -17,10 +24,18 @@ class DriverConfig(BaseModel):
     version: str | None
     local_path: str = ""
 
+    class Config:
+        env_file = '.env'
+        env_file_encoding = 'utf-8'
 
-class LoggingConfig(BaseModel):
-    pylog_level: str = "INFO"
-    screenshots_on: bool = True
+
+class LoggingConfig(BaseSettings):
+    log_level: str = "INFO"
+    screenshots_on: bool = Field(default=True, env="SCREENSHOTS_ON")
+
+    class Config:
+        env_file = '.env'
+        env_file_encoding = 'utf-8'
 
 
 class ViewportConfig(BaseModel):
@@ -30,9 +45,13 @@ class ViewportConfig(BaseModel):
     orientation: str = "portrait"
 
 
-class UIConfig(BaseModel):
-    base_url: str = 'https://www.w3schools.com'
+class UIConfig(BaseSettings):
+    base_url: str = Field(env="BASE_URL")
     driver: DriverConfig = DriverConfig()
     logging: LoggingConfig = LoggingConfig()
     viewport: ViewportConfig = ViewportConfig()
     custom: dict = {}
+
+    class Config:
+        env_file = '.env'
+        env_file_encoding = 'utf-8'

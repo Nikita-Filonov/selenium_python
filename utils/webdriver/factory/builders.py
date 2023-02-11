@@ -128,11 +128,13 @@ def build_remote(
     Returns:
         The instance of WebDriver once the connection is successful
     """
-    caps = build_capabilities(browser, capabilities)
+    capabilities = build_capabilities(browser, capabilities)
     browser_options = build_options(
-        browser, options, experimental_options, extension_paths)
-    for cap in caps:
-        browser_options.set_capability(cap, caps[cap])
+        browser, options, experimental_options, extension_paths
+    )
+
+    for capability in capabilities:
+        browser_options.set_capability(capability, capabilities[capability])
 
     return webdriver.Remote(
         command_executor=remote_url,
