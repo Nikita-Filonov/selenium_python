@@ -31,7 +31,7 @@ class TestW3SchoolsSQL:
     def test_create_customer(self, try_sql_page: TrySQLPage, create_customer: CreateCustomer):
         try_sql_page.visit(f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all')
         try_sql_page.fill_sql_editor(
-            f"INSERT INTO Customers {create_customer.columns()} VALUES {create_customer.values()};"
+            f'INSERT INTO Customers {create_customer.columns()} VALUES {create_customer.values()};'
         )
         try_sql_page.run_sql(rows_affected=1)
 
@@ -57,7 +57,7 @@ class TestW3SchoolsSQL:
     ):
         try_sql_page.visit(f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all')
         try_sql_page.fill_sql_editor(
-            f"UPDATE Customers SET {update_customer.join_values()} WHERE CustomerID={customer_id};"
+            f'UPDATE Customers SET {update_customer.join_values()} WHERE CustomerID={customer_id};'
         )
         try_sql_page.run_sql(rows_affected=1)
 
@@ -70,3 +70,16 @@ class TestW3SchoolsSQL:
             reference_text=customer_id,
             columns=TrySQLPageResultColumn.to_list()
         )
+
+    @pytest.mark.parametrize('customer_id', [1])
+    def test_delete_customer(self, try_sql_page: TrySQLPage, customer_id: int):
+        try_sql_page.visit(f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all')
+        try_sql_page.fill_sql_editor(
+            f'DELETE FROM Customers WHERE CustomerID="{customer_id}";'
+        )
+        try_sql_page.run_sql(rows_affected=1)
+
+        try_sql_page.fill_sql_editor(
+            f'SELECT * FROM CUstomers WHERE CustomerID="{customer_id}";'
+        )
+        try_sql_page.run_sql(empty_result=True)

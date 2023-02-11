@@ -40,7 +40,7 @@ class TrySQLPage(BasePage):
             locator='//div[@class="CodeMirror cm-s-default CodeMirror-wrap"]',
             name="SQL editor"
         )
-        self.insert_result_text = Text(
+        self.query_result_text = Text(
             client,
             locator='//div[@id="divResultSQL"]//div',
             name="Insert result"
@@ -66,14 +66,22 @@ class TrySQLPage(BasePage):
         self.sql_editor.clear()
         self.sql_editor.type(sql)
 
-    def run_sql(self, rows_affected: int | None = None):
+    def run_sql(
+        self,
+        empty_result: bool = False,
+        rows_affected: int | None = None
+    ):
         self.run_sql_button.click()
 
         if rows_affected:
-            self.insert_result_text.should_be_visible()
-            # self.insert_result_text.should_have_text(
-            #     f'You have made changes to the database. Rows affected: {insert_rows}'
-            # )
+            self.query_result_text.should_be_visible()
+            self.query_result_text.should_have_text(
+                f'You have made changes to the database. Rows affected: {rows_affected}'
+            )
+
+        if empty_result:
+            self.query_result_text.should_be_visible()
+            self.query_result_text.should_have_text('No result.')
 
     def check_result_table_data(
         self,

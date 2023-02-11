@@ -37,9 +37,11 @@ class ElementWait:
             except self._ignored_exceptions as exc:
                 screen = getattr(exc, "screen", None)
                 stacktrace = getattr(exc, "stacktrace", None)
+
             time.sleep(0.5)
             if time.time() > end_time:
                 break
+
         raise TimeoutException(message, screen, stacktrace)
 
 
@@ -101,7 +103,8 @@ class ElementShould:
         self._app_web_driver = app_web_driver
         self._element = element
         self._wait = ElementWait(
-            element.webelement, timeout, ignored_exceptions)
+            element.webelement, timeout, ignored_exceptions
+        )
 
     def be_clickable(self) -> "Element":
         try:
@@ -177,8 +180,6 @@ class ElementShould:
         if value:
             return self._element
 
-        print(111111111111, text, self._element.text(),
-              type(text), type(self._element.text()))
         raise AssertionError(
             f"Expected text: `{text}` - Actual text: `{self._element.text()}`"
         )
