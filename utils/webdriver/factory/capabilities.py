@@ -1,6 +1,6 @@
 from selenium import webdriver
 
-from utils.webdriver_factory.browser import Browser
+from utils.webdriver.factory.browser import Browser
 
 Capabilities = dict[str, str]
 

@@ -5,9 +5,9 @@ from seleniumwire import webdriver as wire_driver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
-from utils.webdriver_factory.browser import Browser
-from utils.webdriver_factory.capabilities import build_capabilities
-from utils.webdriver_factory.options import build_options
+from utils.webdriver.factory.browser import Browser
+from utils.webdriver.factory.capabilities import build_capabilities
+from utils.webdriver.factory.options import build_options
 
 
 def build_chrome(

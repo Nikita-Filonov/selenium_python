@@ -1,33 +1,37 @@
 from abc import ABC, abstractmethod
-from typing import Any, Callable, Union
+from typing import TYPE_CHECKING, Callable, Union
 
-from selenium.webdriver.remote.webdriver import WebElement
+from selenium.webdriver.remote.webdriver import WebDriver, WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
-Method = Callable[[WebElement], Any]
+if TYPE_CHECKING:
+    from utils.types.webdriver.page import PageInterface
+
+WebDriverUntilMethod = Callable[[WebDriver], bool]
+WebElementUntilMethod = Callable[[WebElement], bool]
 
 
 class WaitingInterface(ABC):
-    def __init__(self, py, webdriver, timeout, ignored_exceptions: tuple | None = None):
-        self._py = py
-        self._webdriver = webdriver
-        self._wait = WebDriverWait(
-            driver=webdriver,
-            timeout=timeout,
-            ignored_exceptions=ignored_exceptions
-        )
 
     @abstractmethod
-    def sleep(self, seconds: int):
-        pass
+    def __init__(
+        self,
+        driver: "PageInterface",
+        webdriver: WebDriver,
+        timeout: int,
+        ignored_exceptions: tuple | None = None
+    ):
+        self._driver: PageInterface
+        self._webdriver: WebDriver
+        self._wait: WebDriverWait
 
     @abstractmethod
-    def until(self, method: Method, message=""):
-        pass
+    def until(self, method: WebDriverUntilMethod, message=""):
+        ...
 
     @abstractmethod
-    def until_not(self, method: Method, message=""):
-        pass
+    def until_not(self, method: WebDriverUntilMethod, message=""):
+        ...
 
     @abstractmethod
     def build(
@@ -36,4 +40,4 @@ class WaitingInterface(ABC):
         use_self=False,
         ignored_exceptions: list = None
     ) -> Union[WebDriverWait, "WaitingInterface"]:
-        pass
+        ...

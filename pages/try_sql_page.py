@@ -7,7 +7,7 @@ from page_factory.table_row import TableRow
 from page_factory.text import Text
 from page_factory.title import Title
 from pages.base_page import BasePage
-from utils.webdriver.client import AppWebDriver
+from utils.webdriver.driver.page import Page
 
 
 class TrySQLPageResultColumn(IntEnum):
@@ -29,34 +29,34 @@ class TrySQLPageResultColumn(IntEnum):
 
 
 class TrySQLPage(BasePage):
-    def __init__(self, client: AppWebDriver) -> None:
-        super().__init__(client)
+    def __init__(self, page: Page) -> None:
+        super().__init__(page)
 
         self.run_sql_button = Button(
-            client, locator='//button[text()="Run SQL »"]', name="Run SQL »"
+            page, locator='//button[text()="Run SQL »"]', name="Run SQL »"
         )
         self.sql_editor = Editor(
-            client,
+            page,
             locator='//div[@class="CodeMirror cm-s-default CodeMirror-wrap"]',
             name="SQL editor"
         )
         self.query_result_text = Text(
-            client,
+            page,
             locator='//div[@id="divResultSQL"]//div',
             name="Insert result"
         )
         self.number_of_records_title = Title(
-            client,
+            page,
             locator='//div[@id="divResultSQL"]//div//div',
             name="Number of records"
         )
         self.result_table_row = TableRow(
-            client,
+            page,
             locator='//div[@id="divResultSQL"]//tbody//tr',
             name='Result table row'
         )
         self.result_table_data = TableData(
-            client,
+            page,
             locator='//tr/td[text()="{reference_text}"]/../td[{column}]',
             name='Result table data'
         )

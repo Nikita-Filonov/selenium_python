@@ -5,7 +5,8 @@ from pages.try_sql_page import TrySQLPage, TrySQLPageResultColumn
 from utils.constants.routes import UIRoutes
 
 
-class TestW3SchoolsSQL:
+@pytest.mark.customers_sql
+class TestCustomersSQL:
     @pytest.mark.parametrize('text', ['Via Ludovico il Moro 22'])
     @pytest.mark.parametrize('reference_text', ['Via Ludovico il Moro 22'])
     def test_select_all_customers(self, try_sql_page: TrySQLPage, text: str, reference_text: str):

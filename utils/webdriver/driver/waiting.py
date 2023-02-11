@@ -1,16 +1,24 @@
-import time
-from typing import Optional, Tuple, Union
+from typing import Union
 
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
-from utils.types.webdriver.waiting import Method
-from utils.webdriver.element import Element, Elements
+from utils.types.webdriver.page import PageInterface
+from utils.types.webdriver.waiting import WaitingInterface, WebDriverUntilMethod
+from utils.webdriver.driver.element import Element
+from utils.webdriver.driver.elements import Elements
 
 
-class Waiting:
-    def __init__(self, py, webdriver, timeout, ignored_exceptions: Optional[Tuple] = None):
-        self._py = py
+class Waiting(WaitingInterface):
+    def __init__(
+        self,
+        driver: PageInterface,
+        webdriver: WebDriver,
+        timeout: int,
+        ignored_exceptions: tuple | None = None
+    ):
+        self._driver = driver
         self._webdriver = webdriver
         self._wait = WebDriverWait(
             driver=webdriver,
@@ -18,32 +26,29 @@ class Waiting:
             ignored_exceptions=ignored_exceptions
         )
 
-    def sleep(self, seconds: int):
-        time.sleep(seconds)
-
-    def until(self, method: Method, message=""):
+    def until(self, method: WebDriverUntilMethod, message=""):
         value = self._wait.until(method, message)
 
         if isinstance(value, WebElement):
-            return Element(self._py, value, None)
+            return Element(self._driver, value, None)
 
         if isinstance(value, list):
             try:
-                return Elements(self._py, value, None)
+                return Elements(self._driver, value, None)
             except Exception:
                 pass  # not a list of WebElement
 
         return value
 
-    def until_not(self, method: Method, message=""):
+    def until_not(self, method: WebDriverUntilMethod, message=""):
         value = self._wait.until_not(method, message)
 
         if isinstance(value, WebElement):
-            return Element(self._py, value, None)
+            return Element(self._driver, value, None)
 
         if isinstance(value, list):
             try:
-                return Elements(self._py, value, None)
+                return Elements(self._driver, value, None)
             except Exception:
                 pass  # not a list of WebElement
 
@@ -53,6 +58,6 @@ class Waiting:
         self, timeout: int, use_self=False, ignored_exceptions: list = None
     ) -> Union[WebDriverWait, "Waiting"]:
         if use_self:
-            return Waiting(self._py, self._webdriver, timeout, ignored_exceptions)
+            return Waiting(self._driver, self._webdriver, timeout, ignored_exceptions)
 
         return WebDriverWait(self._webdriver, timeout, ignored_exceptions=ignored_exceptions)

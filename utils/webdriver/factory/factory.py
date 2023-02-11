@@ -1,8 +1,8 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from config import UIConfig
-from utils.webdriver_factory.browser import Browser
-from utils.webdriver_factory.builders import (build_chrome, build_firefox,
+from utils.webdriver.factory.browser import Browser
+from utils.webdriver.factory.builders import (build_chrome, build_firefox,
                                               build_remote)
 
 

@@ -7,9 +7,9 @@ class Editor(Textarea):
         return 'editor'
 
     def clear(self):
-        self._client.execute_script("window.editor.setValue('');")
+        self._page.execute_script("window.editor.setValue('');")
 
     def type(self, value: str):
-        self._client.execute_script(
+        self._page.execute_script(
             f"window.editor.setValue(arguments[0]);", value
         )

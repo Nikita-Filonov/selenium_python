@@ -1,9 +1,9 @@
 import pytest
 
 from pages.try_sql_page import TrySQLPage
-from utils.webdriver.client import AppWebDriver
+from utils.webdriver.driver.page import Page
 
 
 @pytest.fixture(scope="function")
-def try_sql_page(webdriver: AppWebDriver) -> TrySQLPage:
-    return TrySQLPage(client=webdriver)
+def try_sql_page(page: Page) -> TrySQLPage:
+    return TrySQLPage(page=page)

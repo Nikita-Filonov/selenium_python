@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from utils.webdriver_factory.browser import Browser
+from utils.webdriver.factory.browser import Browser
 
 
 class DriverConfig(BaseModel):

@@ -1,17 +1,17 @@
 import allure
 
-from utils.webdriver.client import AppWebDriver
+from utils.webdriver.driver.page import Page
 
 
 class BasePage:
-    def __init__(self, client: AppWebDriver) -> None:
-        self.client = client
+    def __init__(self, page: Page) -> None:
+        self.page = page
 
-    def visit(self, url: str) -> AppWebDriver:
+    def visit(self, url: str) -> Page:
         with allure.step(f'Opening the url "{url}"'):
-            return self.client.visit(url)
+            return self.page.visit(url)
 
-    def reload(self) -> AppWebDriver:
-        page_url = self.client.url()
+    def reload(self) -> Page:
+        page_url = self.page.url()
         with allure.step(f'Reloading page with url "{page_url}"'):
-            return self.client.reload()
+            return self.page.reload()
