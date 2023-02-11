@@ -24,7 +24,8 @@ class TrySQLPageResultColumn(IntEnum):
         cls,
         exclude: list['TrySQLPageResultColumn'] | None = None
     ) -> list['TrySQLPageResultColumn']:
-        return [column for column in cls if (column not in exclude)]
+        safe_exclude = exclude or []
+        return [column for column in cls if (column not in safe_exclude)]
 
 
 class TrySQLPage(BasePage):
@@ -65,10 +66,10 @@ class TrySQLPage(BasePage):
         self.sql_editor.clear()
         self.sql_editor.type(sql)
 
-    def run_sql(self, insert_rows: int | None = None):
+    def run_sql(self, rows_affected: int | None = None):
         self.run_sql_button.click()
 
-        if insert_rows:
+        if rows_affected:
             self.insert_result_text.should_be_visible()
             # self.insert_result_text.should_have_text(
             #     f'You have made changes to the database. Rows affected: {insert_rows}'

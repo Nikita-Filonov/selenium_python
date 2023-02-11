@@ -33,3 +33,11 @@ class CreateCustomer(BaseModel):
 
     def values(self) -> CreateCustomerColumns:
         return tuple(self.dict().values())
+
+    def join_values(self) -> str:
+        values = self.values()
+        columns = self.columns()
+
+        return ', '.join([
+            f'{column}="{value}"' for column, value in zip(columns, values)
+        ])

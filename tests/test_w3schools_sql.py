@@ -27,13 +27,13 @@ class TestW3SchoolsSQL:
         try_sql_page.run_sql()
         try_sql_page.check_number_of_records(number_of_records)
 
-    @pytest.mark.parametrize('create_customer', [CreateCustomer.get_random(),])
+    @pytest.mark.parametrize('create_customer', [CreateCustomer.get_random()])
     def test_create_customer(self, try_sql_page: TrySQLPage, create_customer: CreateCustomer):
         try_sql_page.visit(f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all')
         try_sql_page.fill_sql_editor(
             f"INSERT INTO Customers {create_customer.columns()} VALUES {create_customer.values()};"
         )
-        try_sql_page.run_sql(insert_rows=1)
+        try_sql_page.run_sql(rows_affected=1)
 
         try_sql_page.fill_sql_editor(
             f'SELECT * FROM Customers WHERE CustomerName="{create_customer.customer_name}";'
@@ -45,4 +45,28 @@ class TestW3SchoolsSQL:
             columns=TrySQLPageResultColumn.to_list(
                 exclude=[TrySQLPageResultColumn.CUSTOMER_ID]
             )
+        )
+
+    @pytest.mark.parametrize('customer_id', [1])
+    @pytest.mark.parametrize('update_customer', [CreateCustomer.get_random()])
+    def test_update_customer(
+        self,
+        try_sql_page: TrySQLPage,
+        customer_id: int,
+        update_customer: CreateCustomer,
+    ):
+        try_sql_page.visit(f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all')
+        try_sql_page.fill_sql_editor(
+            f"UPDATE Customers SET {update_customer.join_values()} WHERE CustomerID={customer_id};"
+        )
+        try_sql_page.run_sql(rows_affected=1)
+
+        try_sql_page.fill_sql_editor(
+            f'SELECT * FROM Customers WHERE CustomerID="{customer_id}";'
+        )
+        try_sql_page.run_sql()
+        try_sql_page.check_result_table_row(
+            expected_texts=(str(customer_id), *update_customer.values()),
+            reference_text=customer_id,
+            columns=TrySQLPageResultColumn.to_list()
         )
