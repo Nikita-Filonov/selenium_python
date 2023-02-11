@@ -3,8 +3,8 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebElement
 
-from utils.types.webdriver.elements import ElementsInterface
-from utils.types.webdriver.page import PageInterface
+from utils.types.webdriver.driver.elements import ElementsInterface
+from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element_should import ElementShould
 
 
@@ -12,11 +12,11 @@ class Element:
 
     def __init__(
         self,
-        driver: PageInterface,
+        page: PageInterface,
         web_element: WebElement,
         locator: tuple[str, str] | None
     ):
-        self._driver = driver
+        self._page = page
         self._webelement = (web_element,)
         self.locator = locator
 
@@ -30,28 +30,28 @@ class Element:
         if timeout:
             wait_time = timeout
         else:
-            wait_time = self._driver.config.driver.wait_time
+            wait_time = self._page.config.driver.wait_time
 
-        return ElementShould(self._driver, self, wait_time, ignored_exceptions)
+        return ElementShould(self._page, self, wait_time, ignored_exceptions)
 
     def click(self, force=False):
         if force:
-            self._driver.webdriver.execute_script(
+            self._page.webdriver.execute_script(
                 "arguments[0].click()",
                 self.webelement
             )
         else:
             self.webelement.click()
 
-        return self._driver
+        return self._page
 
     def type(self, *args) -> "Element":
-        ActionChains(self._driver.webdriver) \
+        ActionChains(self._page.webdriver) \
             .move_to_element(self.webelement) \
             .send_keys(*args)\
             .perform()
 
-        return self._driver
+        return self._page
 
     def fill(self, *args) -> "Element":
         self.webelement.send_keys(args)
@@ -67,12 +67,12 @@ class Element:
         if timeout == 0:
             elements = self.webelement.find_element(by, xpath)
         else:
-            elements = self._driver.wait(timeout).until(
+            elements = self._page.wait(timeout).until(
                 lambda _: self.webelement.find_element(by, xpath),
                 f"Could not find any elements with the xpath: `{xpath}`",
             )
 
-        return Element(self._driver, elements, locator=(by, xpath))
+        return Element(self._page, elements, locator=(by, xpath))
 
     def find_xpath(self, xpath: str, timeout: int = None) -> "ElementsInterface":
         from utils.webdriver.driver.elements import Elements
@@ -83,10 +83,10 @@ class Element:
             if timeout == 0:
                 elements = self.webelement.find_elements(by, xpath)
             else:
-                elements = self._driver.wait(timeout).until(
+                elements = self._page.wait(timeout).until(
                     lambda _: self.webelement.find_elements(by, xpath),
                     f"Could not find any elements with the xpath: `{xpath}`",
                 )
         except TimeoutException:
             elements = []
-        return Elements(self._driver, elements, locator=(by, xpath))
+        return Elements(self._page, elements, locator=(by, xpath))

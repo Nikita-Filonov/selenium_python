@@ -1,7 +1,7 @@
 from selenium.webdriver.remote.webdriver import WebElement
 
-from utils.types.webdriver.page import PageInterface
-from utils.types.webdriver.element import ElementInterface
+from utils.types.webdriver.driver.page import PageInterface
+from utils.types.webdriver.driver.element import ElementInterface
 
 from utils.webdriver.driver.elements_should import ElementsShould
 
@@ -11,16 +11,16 @@ class Elements(list[ElementInterface]):
 
     def __init__(
         self,
-        driver: PageInterface,
+        page: PageInterface,
         web_elements: list[WebElement],
         locator: tuple[str, str] | None
     ):
         from utils.webdriver.driver.element import Element
 
         self._list: list[ElementInterface] = [
-            Element(driver, element, None) for element in web_elements
+            Element(page, element, None) for element in web_elements
         ]
-        self._driver = driver
+        self._page = page
         self.locator = locator
         super().__init__(self._list)
 
@@ -43,5 +43,5 @@ class Elements(list[ElementInterface]):
         if timeout:
             wait_time = timeout
         else:
-            wait_time = self._driver.config.driver.wait_time
-        return ElementsShould(self._driver, self, wait_time, ignored_exceptions)
+            wait_time = self._page.config.driver.wait_time
+        return ElementsShould(self._page, self, wait_time, ignored_exceptions)

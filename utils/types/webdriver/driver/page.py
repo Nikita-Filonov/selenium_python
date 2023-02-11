@@ -7,7 +7,7 @@ from config import UIConfig
 
 
 if TYPE_CHECKING:
-    from utils.types.webdriver.waiting import WaitingInterface
+    from utils.types.webdriver.driver.waiting import WaitingInterface
 
 
 class PageInterface(ABC):

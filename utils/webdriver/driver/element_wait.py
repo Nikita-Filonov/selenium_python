@@ -1,12 +1,12 @@
 import time
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-
-from utils.types.webdriver.waiting import WebElementUntilMethod
+from selenium.webdriver.remote.webdriver import WebElement
+from utils.types.webdriver.driver.waiting import WebElementUntilMethod
 
 
 class ElementWait:
-    def __init__(self, webelement, timeout: int, ignored_exceptions: list = None):
+    def __init__(self, webelement: WebElement, timeout: int, ignored_exceptions: list = None):
         self._webelement = webelement
         self._timeout = 10 if timeout == 0 else timeout
 

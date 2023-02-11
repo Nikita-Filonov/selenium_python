@@ -1,7 +1,7 @@
 from selenium.common.exceptions import TimeoutException
 
-from utils.types.webdriver.page import PageInterface
-from utils.types.webdriver.elements import ElementsInterface
+from utils.types.webdriver.driver.page import PageInterface
+from utils.types.webdriver.driver.elements import ElementsInterface
 
 
 class ElementsShould:
@@ -9,14 +9,14 @@ class ElementsShould:
 
     def __init__(
         self,
-        driver: PageInterface,
+        page: PageInterface,
         elements: "ElementsInterface",
         timeout: int,
         ignored_exceptions: list = None
     ):
-        self._driver = driver
+        self._page = page
         self._elements = elements
-        self._wait = driver.wait(
+        self._wait = page.wait(
             timeout=timeout,
             use_self=True,
             ignored_exceptions=ignored_exceptions
@@ -52,6 +52,6 @@ class ElementsShould:
             value = False
 
         if value:
-            return Elements(self._driver, value, self._elements.locator)
+            return Elements(self._page, value, self._elements.locator)
 
         raise AssertionError("List of elements was empty")

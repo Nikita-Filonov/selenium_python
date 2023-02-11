@@ -4,7 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 from config import UIConfig
-from utils.types.webdriver.page import PageInterface
+from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element import Element
 from utils.webdriver.driver.elements import Elements
 from utils.webdriver.driver.waiting import Waiting

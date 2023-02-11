@@ -1,8 +1,8 @@
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as ec
 
-from utils.types.webdriver.page import PageInterface
-from utils.types.webdriver.element import ElementInterface
+from utils.types.webdriver.driver.page import PageInterface
+from utils.types.webdriver.driver.element import ElementInterface
 from utils.webdriver.driver.element_wait import ElementWait
 from selenium.common.exceptions import StaleElementReferenceException
 
@@ -11,12 +11,12 @@ class ElementShould:
 
     def __init__(
         self,
-        driver: PageInterface,
+        page: PageInterface,
         element: ElementInterface,
         timeout: int,
         ignored_exceptions: list = None
     ):
-        self._driver = driver
+        self._page = page
         self._element = element
         self._wait = ElementWait(
             element.webelement, timeout, ignored_exceptions
