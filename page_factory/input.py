@@ -13,6 +13,11 @@ class Input(Component):
             element = self.get_element(**kwargs)
             element.type(value)
 
+    def fill(self, value: str, **kwargs):
+        with allure.step(f'Fill {self.type_of} "{self.name}" to value "{value}"'):
+            element = self.get_element(**kwargs)
+            element.fill(value)
+
     def clear(self, **kwargs):
         with allure.step(f'Clearing {self.type_of} "{self.name}"'):
             element = self.get_element(**kwargs)

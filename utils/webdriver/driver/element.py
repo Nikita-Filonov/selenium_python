@@ -1,16 +1,9 @@
-import time
-from typing import Optional, Tuple
-
-from selenium.common.exceptions import (NoSuchElementException,
-                                        TimeoutException, WebDriverException)
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webdriver import WebElement
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.select import Select
-from utils.types.webdriver.elements import ElementsInterface
 
+from utils.types.webdriver.elements import ElementsInterface
 from utils.types.webdriver.page import PageInterface
 from utils.webdriver.driver.element_should import ElementShould
 
@@ -21,7 +14,7 @@ class Element:
         self,
         driver: PageInterface,
         web_element: WebElement,
-        locator: Optional[Tuple]
+        locator: tuple[str, str] | None
     ):
         self._driver = driver
         self._webelement = (web_element,)
@@ -29,7 +22,7 @@ class Element:
 
     @property
     def webelement(self) -> WebElement:
-        if isinstance(self._webelement, Tuple):
+        if isinstance(self._webelement, tuple):
             return self._webelement[0]
         return self._webelement
 
@@ -41,12 +34,6 @@ class Element:
 
         return ElementShould(self._driver, self, wait_time, ignored_exceptions)
 
-    def is_displayed(self) -> bool:
-        return self.webelement.is_displayed()
-
-    def is_enabled(self) -> bool:
-        return self.webelement.is_enabled()
-
     def click(self, force=False):
         if force:
             self._driver.webdriver.execute_script(
@@ -55,20 +42,6 @@ class Element:
             )
         else:
             self.webelement.click()
-
-        return self._driver
-
-    def double_click(self):
-        ActionChains(self._driver.webdriver) \
-            .double_click(self.webelement)\
-            .perform()
-
-        return self._driver
-
-    def hover(self):
-        ActionChains(self._driver.webdriver) \
-            .move_to_element(self.webelement) \
-            .perform()
 
         return self._driver
 
@@ -87,23 +60,6 @@ class Element:
     def clear(self) -> "Element":
         self.webelement.clear()
         return self
-
-    def text(self) -> str:
-        return self.webelement.text
-        by = By.CSS_SELECTOR
-
-        try:
-            if timeout == 0:
-                elements = self.webelement.find_elements(by, css)
-            else:
-                elements = self._driver.wait(timeout).until(
-                    lambda _: self.webelement.find_elements(by, css),
-                    f"Could not find any elements with CSS: `{css}`"
-                )
-        except TimeoutException:
-            elements = []
-
-        return Elements(self._driver, elements, locator=(by, css))
 
     def get_xpath(self, xpath: str, timeout: int = None) -> "Element":
         by = By.XPATH
@@ -134,14 +90,3 @@ class Element:
         except TimeoutException:
             elements = []
         return Elements(self._driver, elements, locator=(by, xpath))
-
-    def screenshot(self, filename) -> "Element":
-        self.webelement.screenshot(filename)
-        return self
-
-    def scroll_into_view(self) -> "Element":
-        self._driver.webdriver.execute_script(
-            "arguments[0].scrollIntoView(true);",
-            self.webelement
-        )
-        return self

@@ -1,3 +1,5 @@
+import allure
+
 from page_factory.textarea import Textarea
 
 
@@ -7,9 +9,11 @@ class Editor(Textarea):
         return 'editor'
 
     def clear(self):
-        self._page.execute_script("window.editor.setValue('');")
+        with allure.step(f'Clearing {self.type_of} with name "{self.name}"'):
+            self._page.execute_script("window.editor.setValue('');")
 
     def type(self, value: str):
-        self._page.execute_script(
-            f"window.editor.setValue(arguments[0]);", value
-        )
+        with allure.step(f'Typing value "{value}" to {self.type_of} with name "{self.name}"'):
+            self._page.execute_script(
+                f"window.editor.setValue(arguments[0]);", value
+            )

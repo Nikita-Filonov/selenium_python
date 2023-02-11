@@ -45,23 +45,3 @@ class Elements(list[ElementInterface]):
         else:
             wait_time = self._driver.config.driver.wait_time
         return ElementsShould(self._driver, self, wait_time, ignored_exceptions)
-
-    def first(self) -> "ElementInterface":
-        """Gets the first element in the list.
-
-        Raises:
-            `IndexError` if the list is empty.
-        """
-        if self.length() > 0:
-            return self._list[0]
-        raise IndexError("Cannot get first() from an empty list")
-
-    def last(self) -> "ElementInterface":
-        """Gets the last element in the list.
-
-        Raises:
-            `IndexError` if the list is empty.
-        """
-        if self.length() > 0:
-            return self._list[-1]
-        raise IndexError("Cannot get last() from an empty list")

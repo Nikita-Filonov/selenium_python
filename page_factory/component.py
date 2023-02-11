@@ -1,6 +1,5 @@
 import allure
 from selenium.common.exceptions import StaleElementReferenceException
-from waiting import wait
 
 from utils.webdriver.driver.element import Element
 from utils.webdriver.driver.elements import Elements
@@ -22,13 +21,16 @@ class Component:
         return self._name
 
     def get_element(self, **kwargs) -> Element:
-        print('getting element')
         locator = self._locator.format(**kwargs)
-        return self._page.get_xpath(locator)
+
+        with allure.step(f'Getting {self.type_of} with name "{self.name}" and locator "{locator}"'):
+            return self._page.get_xpath(locator)
 
     def get_elements(self, **kwargs) -> Elements:
         locator = self._locator.format(**kwargs)
-        return self._page.find_xpath(locator)
+
+        with allure.step(f'Getting {self.type_of}s with name "{self.name}" and locator "{locator}"'):
+            return self._page.find_xpath(locator)
 
     def click(self, **kwargs) -> None:
         with allure.step(f'Clicking {self.type_of} with name "{self.name}"'):

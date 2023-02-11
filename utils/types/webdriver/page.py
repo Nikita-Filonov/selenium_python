@@ -18,7 +18,7 @@ class PageInterface(ABC):
 
     @abstractproperty
     def webdriver(self) -> WebDriver:
-        pass
+        ...
 
     @abstractmethod
     def wait(
@@ -27,4 +27,4 @@ class PageInterface(ABC):
         use_self: bool = False,
         ignored_exceptions: list = None
     ) -> Union[WebDriverWait, "WaitingInterface"]:
-        pass
+        ...

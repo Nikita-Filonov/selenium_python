@@ -1,5 +1,7 @@
 from enum import IntEnum
 
+import allure
+
 from page_factory.button import Button
 from page_factory.editor import Editor
 from page_factory.table_data import TableData
@@ -61,11 +63,13 @@ class TrySQLPage(BasePage):
             name='Result table data'
         )
 
+    @allure.step('Fill SQL editor with value "{sql}"')
     def fill_sql_editor(self, sql: str):
         self.sql_editor.should_be_visible()
         self.sql_editor.clear()
         self.sql_editor.type(sql)
 
+    @allure.step('Running SQL script')
     def run_sql(
         self,
         empty_result: bool = False,
@@ -83,6 +87,7 @@ class TrySQLPage(BasePage):
             self.query_result_text.should_be_visible()
             self.query_result_text.should_have_text('No result.')
 
+    @allure.step('Checking that result table data has text "{expected_text}" in column "{column}"')
     def check_result_table_data(
         self,
         expected_text: str,
@@ -96,6 +101,7 @@ class TrySQLPage(BasePage):
             expected_text, reference_text=reference_text, column=column
         )
 
+    @allure.step('Checking that result table row have values "{expected_texts}"')
     def check_result_table_row(
         self,
         expected_texts: list[str | int],
@@ -109,6 +115,7 @@ class TrySQLPage(BasePage):
                 column=column
             )
 
+    @allure.step('Checking that number of records in result equals to "{number_of_records}"')
     def check_number_of_records(self, number_of_records: int):
         self.number_of_records_title.should_be_visible()
         self.number_of_records_title.should_have_text(
