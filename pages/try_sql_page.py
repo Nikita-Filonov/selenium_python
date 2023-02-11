@@ -21,6 +21,9 @@ class TrySQLPageResultColumn(IntEnum):
     POSTAL_CODE = 6
     COUNTRY = 7
 
+    def __str__(self) -> str:
+        return self.name
+
     @classmethod
     def to_list(
         cls,
