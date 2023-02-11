@@ -9,6 +9,7 @@ __pycache__/
 .idea
 allure-results
 allure-reports
+screenshots
 
 # Distribution / packaging
 .Python

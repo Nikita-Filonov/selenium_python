@@ -7,6 +7,11 @@ services:
       - .:/code
     env_file:
       - .env
+    networks:
+      - selenium
+    depends_on:
+      - chrome
+      - selenium-hub
   chrome:
     image: selenium/node-chrome:latest
     shm_size: 2gb
@@ -27,7 +32,11 @@ services:
     networks:
       - selenium
     ports:
+      - "4442:4442"
+      - "4443:4443"
       - "4444:4444"
+    expose:
+      - "4444"
 
 networks:
   selenium:
