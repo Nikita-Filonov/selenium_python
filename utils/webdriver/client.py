@@ -8,7 +8,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from config import UIConfig
 from utils.types.webdriver.client import AppWebDriverInterface
 from utils.webdriver.element import Element, Elements
-from utils.webdriver.logger import logger
 from utils.webdriver.waiting import Waiting
 from utils.webdriver_factory.factory import build_from_config
 
@@ -41,10 +40,6 @@ class AppWebDriver(AppWebDriverInterface):  # TODO rename
                 self.config.viewport.orientation
             )
         return self._webdriver
-
-    @property
-    def log(self) -> Logger:
-        return logger
 
     @property
     def webdriver(self) -> WebDriver:
