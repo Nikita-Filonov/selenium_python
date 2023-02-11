@@ -103,7 +103,7 @@ def build_firefox(
 
 
 def build_remote(
-    browser: str,
+    browser: Browser,
     remote_url: str,
     options: list[str] | None,
     capabilities: dict | None,
@@ -116,7 +116,7 @@ def build_remote(
     Args:
         browser: Name of the browser to connect to.
         remote_url: The URL to connect to the Grid.
-        browser_options: The list of options/arguments to include.
+        options: The list of options/arguments to include.
         capabilities: The dict of capabilities to include.
         experimental_options: The list of experimental options to include.
         extension_paths: The list of extensions to add to the browser.

@@ -3,12 +3,13 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebElement
 
+from utils.types.webdriver.driver.element import ElementInterface
 from utils.types.webdriver.driver.elements import ElementsInterface
 from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element_should import ElementShould
 
 
-class Element:
+class Element(ElementInterface):
 
     def __init__(
         self,
@@ -17,14 +18,12 @@ class Element:
         locator: tuple[str, str] | None
     ):
         self._page = page
-        self._webelement = (web_element,)
+        self._web_element = web_element
         self.locator = locator
 
     @property
-    def webelement(self) -> WebElement:
-        if isinstance(self._webelement, tuple):
-            return self._webelement[0]
-        return self._webelement
+    def web_element(self) -> WebElement:
+        return self._web_element
 
     def should(self, timeout: int = 0, ignored_exceptions: list = None) -> ElementShould:
         if timeout:
@@ -38,37 +37,37 @@ class Element:
         if force:
             self._page.webdriver.execute_script(
                 "arguments[0].click()",
-                self.webelement
+                self.web_element
             )
         else:
-            self.webelement.click()
+            self.web_element.click()
 
         return self._page
 
     def type(self, *args) -> "Element":
         ActionChains(self._page.webdriver) \
-            .move_to_element(self.webelement) \
+            .move_to_element(self.web_element) \
             .send_keys(*args)\
             .perform()
 
-        return self._page
+        return self
 
     def fill(self, *args) -> "Element":
-        self.webelement.send_keys(args)
+        self.web_element.send_keys(args)
         return self
 
     def clear(self) -> "Element":
-        self.webelement.clear()
+        self.web_element.clear()
         return self
 
     def get_xpath(self, xpath: str, timeout: int = None) -> "Element":
         by = By.XPATH
 
         if timeout == 0:
-            elements = self.webelement.find_element(by, xpath)
+            elements = self.web_element.find_element(by, xpath)
         else:
             elements = self._page.wait(timeout).until(
-                lambda _: self.webelement.find_element(by, xpath),
+                lambda _: self.web_element.find_element(by, xpath),
                 f"Could not find any elements with the xpath: `{xpath}`",
             )
 
@@ -81,10 +80,10 @@ class Element:
 
         try:
             if timeout == 0:
-                elements = self.webelement.find_elements(by, xpath)
+                elements = self.web_element.find_elements(by, xpath)
             else:
                 elements = self._page.wait(timeout).until(
-                    lambda _: self.webelement.find_elements(by, xpath),
+                    lambda _: self.web_element.find_elements(by, xpath),
                     f"Could not find any elements with the xpath: `{xpath}`",
                 )
         except TimeoutException:

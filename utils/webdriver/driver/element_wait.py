@@ -6,8 +6,8 @@ from utils.types.webdriver.driver.waiting import WebElementUntilMethod
 
 
 class ElementWait:
-    def __init__(self, webelement: WebElement, timeout: int, ignored_exceptions: list = None):
-        self._webelement = webelement
+    def __init__(self, web_element: WebElement, timeout: int, ignored_exceptions: list = None):
+        self._web_element = web_element
         self._timeout = 10 if timeout == 0 else timeout
 
         if ignored_exceptions:
@@ -22,7 +22,7 @@ class ElementWait:
         end_time = time.time() + self._timeout
         while True:
             try:
-                value = method(self._webelement)
+                value = method(self._web_element)
                 if value:
                     return value
             except self._ignored_exceptions as exc:

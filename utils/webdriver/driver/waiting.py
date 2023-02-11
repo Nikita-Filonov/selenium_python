@@ -12,11 +12,11 @@ from utils.webdriver.driver.elements import Elements
 
 class Waiting(WaitingInterface):
     def __init__(
-        self,
-        page: PageInterface,
-        webdriver: WebDriver,
-        timeout: int,
-        ignored_exceptions: tuple | None = None
+            self,
+            page: PageInterface,
+            webdriver: WebDriver,
+            timeout: int,
+            ignored_exceptions: tuple | None = None
     ):
         self._page = page
         self._webdriver = webdriver
@@ -33,10 +33,7 @@ class Waiting(WaitingInterface):
             return Element(self._page, value, None)
 
         if isinstance(value, list):
-            try:
-                return Elements(self._page, value, None)
-            except Exception:
-                pass  # not a list of WebElement
+            return Elements(self._page, value, None)
 
         return value
 
@@ -47,15 +44,12 @@ class Waiting(WaitingInterface):
             return Element(self._page, value, None)
 
         if isinstance(value, list):
-            try:
-                return Elements(self._page, value, None)
-            except Exception:
-                pass  # not a list of WebElement
+            return Elements(self._page, value, None)
 
         return value
 
     def build(
-        self, timeout: int, use_self=False, ignored_exceptions: list = None
+            self, timeout: int, use_self=False, ignored_exceptions: list = None
     ) -> Union[WebDriverWait, "Waiting"]:
         if use_self:
             return Waiting(self._page, self._webdriver, timeout, ignored_exceptions)

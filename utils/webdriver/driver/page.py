@@ -90,7 +90,7 @@ class Page(PageInterface):
         return Elements(self, elements, locator=(by, xpath))
 
     def wait(
-        self, timeout: int = None, use_self: bool = False, ignored_exceptions: list = None
+            self, timeout: int = None, use_self: bool = False, ignored_exceptions: list = None
     ) -> WebDriverWait | Waiting:
         if timeout:
             return self._wait.build(timeout, use_self, ignored_exceptions)
@@ -110,4 +110,17 @@ class Page(PageInterface):
 
     def execute_script(self, script: str, *args) -> "Page":
         self.webdriver.execute_script(script, *args)
+        return self
+
+    def set_page_load_timeout(self, timeout: int) -> "Page":
+        self.webdriver.set_page_load_timeout(timeout)
+        return self
+
+    def viewport(self, width: int, height: int, orientation: str = "portrait") -> "Page":
+        if orientation == "portrait":
+            self.webdriver.set_window_size(width, height)
+        elif orientation == "landscape":
+            self.webdriver.set_window_size(height, width)
+        else:
+            raise ValueError("Orientation must be `portrait` or `landscape`.")
         return self

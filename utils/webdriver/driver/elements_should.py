@@ -51,7 +51,7 @@ class ElementsShould:
         except TimeoutException:
             value = False
 
-        if value:
+        if isinstance(value, list):
             return Elements(self._page, value, self._elements.locator)
 
         raise AssertionError("List of elements was empty")

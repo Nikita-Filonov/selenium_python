@@ -3,8 +3,6 @@ from pydantic import BaseModel, Field
 from utils.fakers.numbers import get_random_number
 from utils.fakers.strings import get_random_string
 
-CreateCustomerColumns = tuple[str, str, str, str, str, str]
-
 
 class CreateCustomer(BaseModel):
     customer_name: str = Field(alias='CustomerName')
@@ -28,10 +26,10 @@ class CreateCustomer(BaseModel):
             country=get_random_string()
         )
 
-    def columns(self) -> CreateCustomerColumns:
+    def columns(self) -> tuple[str, ...]:
         return tuple(self.dict(by_alias=True).keys())
 
-    def values(self) -> CreateCustomerColumns:
+    def values(self) -> tuple[str, ...]:
         return tuple(self.dict().values())
 
     def join_values(self) -> str:

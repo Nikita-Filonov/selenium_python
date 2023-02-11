@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Union
 
 from selenium.webdriver.remote.webdriver import WebDriver
@@ -13,12 +13,14 @@ if TYPE_CHECKING:
 
 
 class PageInterface(ABC):
+    config: UIConfig
+
+    @abstractmethod
     def __init__(self, config: UIConfig) -> None:
-        super().__init__()
+        ...
 
-        self.config = config
-
-    @abstractproperty
+    @property
+    @abstractmethod
     def webdriver(self) -> WebDriver:
         ...
 

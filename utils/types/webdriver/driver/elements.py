@@ -1,26 +1,29 @@
-from abc import ABC, abstractclassmethod
-from utils.types.webdriver.driver.page import PageInterface
+from abc import ABC, abstractmethod
+
 from selenium.webdriver.remote.webdriver import WebElement
+
 from utils.types.webdriver.driver.element import ElementInterface
+from utils.types.webdriver.driver.page import PageInterface
 
 
-class ElementsInterface(ABC, list[ElementInterface]):
-    @abstractclassmethod
+class ElementsInterface(ABC):
+    _list: list[ElementInterface]
+    _page: PageInterface
+    locator: tuple[str, str] | None
+
+    @abstractmethod
     def __init__(
-        self,
-        page: PageInterface,
-        web_elements: list[WebElement],
-        locator: tuple[str, str] | None
+            self,
+            page: PageInterface,
+            web_elements: list[WebElement],
+            locator: tuple[str, str] | None
     ):
-        self._list: list[ElementInterface]
-        self._page: PageInterface
-        self.locator: tuple[str, str] | None
-        super().__init__(self._list)
+        ...
 
-    @abstractclassmethod
+    @abstractmethod
     def length(self) -> int:
         ...
 
-    @abstractclassmethod
+    @abstractmethod
     def is_empty(self) -> bool:
         ...

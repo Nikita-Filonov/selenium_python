@@ -1,12 +1,13 @@
 from selenium.webdriver.remote.webdriver import WebElement
 
+from utils.types.webdriver.driver.elements import ElementsInterface
 from utils.types.webdriver.driver.page import PageInterface
 from utils.types.webdriver.driver.element import ElementInterface
 
 from utils.webdriver.driver.elements_should import ElementsShould
 
 
-class Elements(list[ElementInterface]):
+class Elements(ElementsInterface):
     """Elements API: Represents a list of DOM webelements and includes commands to work with them."""
 
     def __init__(
@@ -22,7 +23,6 @@ class Elements(list[ElementInterface]):
         ]
         self._page = page
         self.locator = locator
-        super().__init__(self._list)
 
     def length(self) -> int:
         """The number of elements in the list."""
