@@ -1,0 +1,51 @@
+[ {
+  "uid" : "dfff93f27ad3dbb6",
+  "name" : "Create customer",
+  "time" : {
+    "start" : 1676194851420,
+    "stop" : 1676194856088,
+    "duration" : 4668
+  },
+  "status" : "passed",
+  "severity" : "critical"
+}, {
+  "uid" : "50e101896b909c0f",
+  "name" : "Select all customers",
+  "time" : {
+    "start" : 1676194845034,
+    "stop" : 1676194848602,
+    "duration" : 3568
+  },
+  "status" : "passed",
+  "severity" : "critical"
+}, {
+  "uid" : "75cc35bef1b0498",
+  "name" : "Delete customer",
+  "time" : {
+    "start" : 1676194860801,
+    "stop" : 1676194863253,
+    "duration" : 2452
+  },
+  "status" : "passed",
+  "severity" : "critical"
+}, {
+  "uid" : "4016c4e2667a7019",
+  "name" : "Filter customers",
+  "time" : {
+    "start" : 1676194849047,
+    "stop" : 1676194850946,
+    "duration" : 1899
+  },
+  "status" : "passed",
+  "severity" : "critical"
+}, {
+  "uid" : "27c7177e1c0b2bec",
+  "name" : "Update customer",
+  "time" : {
+    "start" : 1676194856526,
+    "stop" : 1676194860261,
+    "duration" : 3735
+  },
+  "status" : "passed",
+  "severity" : "critical"
+} ]

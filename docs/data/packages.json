@@ -1,0 +1,74 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "tests.test_customers_sql",
+    "children" : [ {
+      "name" : "Select all customers",
+      "uid" : "50e101896b909c0f",
+      "parentUid" : "563deb89585c6e3b01f036e7f62d3b4b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1676194845034,
+        "stop" : 1676194848602,
+        "duration" : 3568
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "'Via Ludovico il Moro 22'", "'Via Ludovico il Moro 22'" ]
+    }, {
+      "name" : "Filter customers",
+      "uid" : "4016c4e2667a7019",
+      "parentUid" : "563deb89585c6e3b01f036e7f62d3b4b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1676194849047,
+        "stop" : 1676194850946,
+        "duration" : 1899
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "6" ]
+    }, {
+      "name" : "Create customer",
+      "uid" : "dfff93f27ad3dbb6",
+      "parentUid" : "563deb89585c6e3b01f036e7f62d3b4b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1676194851420,
+        "stop" : 1676194856088,
+        "duration" : 4668
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "CreateCustomer(customer_name='tKEGXG2rvIaH', contact_name='bsDUYD5g6', address='Wd8Xmkiwl8', city='aY911Xx7Z2p5a', postal_code='497', country='5hv60jUzO')" ]
+    }, {
+      "name" : "Update customer",
+      "uid" : "27c7177e1c0b2bec",
+      "parentUid" : "563deb89585c6e3b01f036e7f62d3b4b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1676194856526,
+        "stop" : 1676194860261,
+        "duration" : 3735
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "1", "CreateCustomer(customer_name='cKQflX7kixwt', contact_name='4NpuUqp6MZOSWRq', address='bYOP1MTWCDy', city='i8rKllqcsxCUw', postal_code='461', country='et3QbrRx6DlAQE')" ]
+    }, {
+      "name" : "Delete customer",
+      "uid" : "75cc35bef1b0498",
+      "parentUid" : "563deb89585c6e3b01f036e7f62d3b4b",
+      "status" : "passed",
+      "time" : {
+        "start" : 1676194860801,
+        "stop" : 1676194863253,
+        "duration" : 2452
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "1" ]
+    } ],
+    "uid" : "tests.test_customers_sql"
+  } ]
+}

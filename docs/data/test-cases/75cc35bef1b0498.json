@@ -1,0 +1,576 @@
+{
+  "uid" : "75cc35bef1b0498",
+  "name" : "Delete customer",
+  "fullName" : "tests.test_customers_sql.TestCustomersSQL#test_delete_customer",
+  "historyId" : "3a722f825f913a3567a3ee74e65a269a",
+  "time" : {
+    "start" : 1676194860801,
+    "stop" : 1676194863253,
+    "duration" : 2452
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "page",
+    "time" : {
+      "start" : 1676194860496,
+      "stop" : 1676194860801,
+      "duration" : 305
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "ui_config",
+    "time" : {
+      "start" : 1676194844744,
+      "stop" : 1676194844745,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  }, {
+    "name" : "try_sql_page",
+    "time" : {
+      "start" : 1676194860801,
+      "stop" : 1676194860801,
+      "duration" : 0
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : false,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ {
+      "name" : "Opening the url \"/sql/trysql.asp?filename=trysql_select_all\"",
+      "time" : {
+        "start" : 1676194860801,
+        "stop" : 1676194861561,
+        "duration" : 760
+      },
+      "status" : "passed",
+      "steps" : [ ],
+      "attachments" : [ ],
+      "parameters" : [ ],
+      "stepsCount" : 0,
+      "hasContent" : false,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Fill SQL editor with value \"'DELETE FROM Customers WHERE CustomerID=\"1\";'\"",
+      "time" : {
+        "start" : 1676194861561,
+        "stop" : 1676194861721,
+        "duration" : 160
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Checking that editor \"SQL editor\" is visible",
+        "time" : {
+          "start" : 1676194861561,
+          "stop" : 1676194861592,
+          "duration" : 31
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting editor with name \"SQL editor\" and locator \"//div[@class=\"CodeMirror cm-s-default CodeMirror-wrap\"]\"",
+          "time" : {
+            "start" : 1676194861561,
+            "stop" : 1676194861577,
+            "duration" : 16
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Clearing editor with name \"SQL editor\"",
+        "time" : {
+          "start" : 1676194861592,
+          "stop" : 1676194861663,
+          "duration" : 71
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "hasContent" : false,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Typing value \"DELETE FROM Customers WHERE CustomerID=\"1\";\" to editor with name \"SQL editor\"",
+        "time" : {
+          "start" : 1676194861663,
+          "stop" : 1676194861721,
+          "duration" : 58
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "hasContent" : false,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "sql",
+        "value" : "'DELETE FROM Customers WHERE CustomerID=\"1\";'"
+      } ],
+      "stepsCount" : 4,
+      "hasContent" : true,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Running SQL script",
+      "time" : {
+        "start" : 1676194861721,
+        "stop" : 1676194862681,
+        "duration" : 960
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Clicking button with name \"Run SQL »\"",
+        "time" : {
+          "start" : 1676194861721,
+          "stop" : 1676194861859,
+          "duration" : 138
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting button with name \"Run SQL »\" and locator \"//button[text()=\"Run SQL »\"]\"",
+          "time" : {
+            "start" : 1676194861721,
+            "stop" : 1676194861783,
+            "duration" : 62
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Checking that text \"Query result\" is visible",
+        "time" : {
+          "start" : 1676194861859,
+          "stop" : 1676194861971,
+          "duration" : 112
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting text with name \"Query result\" and locator \"//div[@id=\"divResultSQL\"]//div\"",
+          "time" : {
+            "start" : 1676194861859,
+            "stop" : 1676194861952,
+            "duration" : 93
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Checking that text \"Query result\" has text \"You have made changes to the database. Rows affected: 1\"",
+        "time" : {
+          "start" : 1676194861971,
+          "stop" : 1676194862681,
+          "duration" : 710
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting text with name \"Query result\" and locator \"//div[@id=\"divResultSQL\"]//div\"",
+          "time" : {
+            "start" : 1676194861971,
+            "stop" : 1676194862069,
+            "duration" : 98
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        }, {
+          "name" : "Checking that text \"Query result\" has text \"You have made changes to the database. Rows affected: 1\"",
+          "time" : {
+            "start" : 1676194862614,
+            "stop" : 1676194862681,
+            "duration" : 67
+          },
+          "status" : "passed",
+          "steps" : [ {
+            "name" : "Getting text with name \"Query result\" and locator \"//div[@id=\"divResultSQL\"]//div\"",
+            "time" : {
+              "start" : 1676194862614,
+              "stop" : 1676194862665,
+              "duration" : 51
+            },
+            "status" : "passed",
+            "steps" : [ ],
+            "attachments" : [ ],
+            "parameters" : [ ],
+            "stepsCount" : 0,
+            "hasContent" : false,
+            "attachmentsCount" : 0,
+            "shouldDisplayMessage" : false
+          } ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 1,
+          "hasContent" : true,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 3,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "empty_result",
+        "value" : "False"
+      }, {
+        "name" : "rows_affected",
+        "value" : "1"
+      } ],
+      "stepsCount" : 8,
+      "hasContent" : true,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Fill SQL editor with value \"'SELECT * FROM Customers WHERE CustomerID=\"1\";'\"",
+      "time" : {
+        "start" : 1676194862681,
+        "stop" : 1676194862912,
+        "duration" : 231
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Checking that editor \"SQL editor\" is visible",
+        "time" : {
+          "start" : 1676194862681,
+          "stop" : 1676194862803,
+          "duration" : 122
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting editor with name \"SQL editor\" and locator \"//div[@class=\"CodeMirror cm-s-default CodeMirror-wrap\"]\"",
+          "time" : {
+            "start" : 1676194862681,
+            "stop" : 1676194862740,
+            "duration" : 59
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Clearing editor with name \"SQL editor\"",
+        "time" : {
+          "start" : 1676194862803,
+          "stop" : 1676194862857,
+          "duration" : 54
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "hasContent" : false,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Typing value \"SELECT * FROM Customers WHERE CustomerID=\"1\";\" to editor with name \"SQL editor\"",
+        "time" : {
+          "start" : 1676194862857,
+          "stop" : 1676194862912,
+          "duration" : 55
+        },
+        "status" : "passed",
+        "steps" : [ ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 0,
+        "hasContent" : false,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "sql",
+        "value" : "'SELECT * FROM Customers WHERE CustomerID=\"1\";'"
+      } ],
+      "stepsCount" : 4,
+      "hasContent" : true,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    }, {
+      "name" : "Running SQL script",
+      "time" : {
+        "start" : 1676194862912,
+        "stop" : 1676194863253,
+        "duration" : 341
+      },
+      "status" : "passed",
+      "steps" : [ {
+        "name" : "Clicking button with name \"Run SQL »\"",
+        "time" : {
+          "start" : 1676194862912,
+          "stop" : 1676194863054,
+          "duration" : 142
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting button with name \"Run SQL »\" and locator \"//button[text()=\"Run SQL »\"]\"",
+          "time" : {
+            "start" : 1676194862912,
+            "stop" : 1676194862969,
+            "duration" : 57
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Checking that text \"Query result\" is visible",
+        "time" : {
+          "start" : 1676194863054,
+          "stop" : 1676194863165,
+          "duration" : 111
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting text with name \"Query result\" and locator \"//div[@id=\"divResultSQL\"]//div\"",
+          "time" : {
+            "start" : 1676194863054,
+            "stop" : 1676194863118,
+            "duration" : 64
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      }, {
+        "name" : "Checking that text \"Query result\" has text \"No result.\"",
+        "time" : {
+          "start" : 1676194863171,
+          "stop" : 1676194863253,
+          "duration" : 82
+        },
+        "status" : "passed",
+        "steps" : [ {
+          "name" : "Getting text with name \"Query result\" and locator \"//div[@id=\"divResultSQL\"]//div\"",
+          "time" : {
+            "start" : 1676194863171,
+            "stop" : 1676194863238,
+            "duration" : 67
+          },
+          "status" : "passed",
+          "steps" : [ ],
+          "attachments" : [ ],
+          "parameters" : [ ],
+          "stepsCount" : 0,
+          "hasContent" : false,
+          "attachmentsCount" : 0,
+          "shouldDisplayMessage" : false
+        } ],
+        "attachments" : [ ],
+        "parameters" : [ ],
+        "stepsCount" : 1,
+        "hasContent" : true,
+        "attachmentsCount" : 0,
+        "shouldDisplayMessage" : false
+      } ],
+      "attachments" : [ ],
+      "parameters" : [ {
+        "name" : "empty_result",
+        "value" : "True"
+      }, {
+        "name" : "rows_affected",
+        "value" : "None"
+      } ],
+      "stepsCount" : 6,
+      "hasContent" : true,
+      "attachmentsCount" : 0,
+      "shouldDisplayMessage" : false
+    } ],
+    "attachments" : [ {
+      "uid" : "66046cfbfb0c166a",
+      "name" : "log",
+      "source" : "66046cfbfb0c166a.txt",
+      "type" : "text/plain",
+      "size" : 2306
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 27,
+    "hasContent" : true,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  },
+  "afterStages" : [ {
+    "name" : "page::0",
+    "time" : {
+      "start" : 1676194863255,
+      "stop" : 1676194863430,
+      "duration" : 175
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "b07a9dbc18ac810",
+      "name" : "Page",
+      "source" : "b07a9dbc18ac810.png",
+      "type" : "image/png",
+      "size" : 88853
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "hasContent" : true,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false
+  } ],
+  "labels" : [ {
+    "name" : "suite",
+    "value" : "Smoke"
+  }, {
+    "name" : "severity",
+    "value" : "critical"
+  }, {
+    "name" : "feature",
+    "value" : "Customers"
+  }, {
+    "name" : "tag",
+    "value" : "customers_sql"
+  }, {
+    "name" : "tag",
+    "value" : "ui"
+  }, {
+    "name" : "parentSuite",
+    "value" : "tests"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestCustomersSQL"
+  }, {
+    "name" : "host",
+    "value" : "LAPTOP-VDKHCJMI"
+  }, {
+    "name" : "thread",
+    "value" : "1712-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "tests.test_customers_sql"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "customer_id",
+    "value" : "1"
+  } ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "critical",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ "ui", "customers_sql" ]
+  },
+  "source" : "75cc35bef1b0498.json",
+  "parameterValues" : [ "1" ]
+}

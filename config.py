@@ -1,6 +1,6 @@
 from functools import lru_cache
 
-from pydantic import BaseModel, BaseSettings, DirectoryPath, Field
+from pydantic import BaseModel, BaseSettings, Field
 
 from utils.webdriver.factory.browser import Browser
 
@@ -34,7 +34,7 @@ class DriverConfig(BaseSettings):
 class LoggingConfig(BaseSettings):
     log_level: str = "INFO"
     screenshots_on: bool = Field(default=True, env="SCREENSHOTS_ON")
-    screenshots_dir: DirectoryPath = Field(
+    screenshots_dir: str = Field(
         default='./screenshots', env="SCREENSHOTS_DIR"
     )
 

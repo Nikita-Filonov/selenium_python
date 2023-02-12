@@ -1,0 +1,12 @@
+[32mINFO    [0m Logger:page.py:70 Page.wait_for_alive() - Page wait until driver stable
+[32mINFO    [0m Logger:page.py:138 Page.maximize_window() - Maximize browser window
+[32mINFO    [0m Logger:page.py:58 Page.visit() - Visit URL: `https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all`
+[32mINFO    [0m Logger:page.py:79 Page.get_xpath() - Get the element with xpath: `//div[@class="CodeMirror cm-s-default CodeMirror-wrap"]`
+[32mINFO    [0m Logger:page.py:144 Page.execute_script() - Execute javascript `window.editor.setValue('');` into the Browser
+[32mINFO    [0m Logger:page.py:144 Page.execute_script() - Execute javascript `window.editor.setValue(arguments[0]);` into the Browser
+[32mINFO    [0m Logger:page.py:79 Page.get_xpath() - Get the element with xpath: `//button[text()="Run SQL »"]`
+[32mINFO    [0m Logger:element.py:35 Element.click() - Click this element
+[32mINFO    [0m Logger:page.py:79 Page.get_xpath() - Get the element with xpath: `//tr/td[text()="Via Ludovico il Moro 22"]/../td[4]`
+[32mINFO    [0m Logger:page.py:79 Page.get_xpath() - Get the element with xpath: `//tr/td[text()="Via Ludovico il Moro 22"]/../td[4]`
+[32mINFO    [0m Logger:page.py:132 Page.screenshot() - Save screenshot to: `screenshots/test_select_all_customers[Via Ludovico il Moro 22-Via Ludovico il Moro 22].png`
+[32mINFO    [0m Logger:page.py:125 Page.quit() - Quit page and close all windows from the browser session
