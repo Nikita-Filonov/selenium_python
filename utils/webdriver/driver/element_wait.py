@@ -2,18 +2,20 @@ import time
 
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.remote.webdriver import WebElement
-from utils.types.webdriver.driver.waiting import WebElementUntilMethod
+
+from utils.types.webdriver.driver.element_wait import ElementWaitInterface
+from utils.types.webdriver.driver.page_wait import WebElementUntilMethod
 
 
-class ElementWait:
-    def __init__(self, web_element: WebElement, timeout: int, ignored_exceptions: list = None):
+class ElementWait(ElementWaitInterface):
+    def __init__(self, web_element: WebElement, timeout: int, ignored_exceptions: tuple = None):
         self._web_element = web_element
         self._timeout = 10 if timeout == 0 else timeout
 
         if ignored_exceptions:
             self._ignored_exceptions = ignored_exceptions
         else:
-            self._ignored_exceptions = NoSuchElementException
+            self._ignored_exceptions = (NoSuchElementException,)
 
     def until(self, method: WebElementUntilMethod, message=""):
         screen = None

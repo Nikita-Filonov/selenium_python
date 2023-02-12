@@ -10,10 +10,10 @@ from utils.webdriver.driver.element_should import ElementShould
 class Element(ElementInterface):
 
     def __init__(
-        self,
-        page: PageInterface,
-        web_element: WebElement,
-        locator: tuple[str, str] | None
+            self,
+            page: PageInterface,
+            web_element: WebElement,
+            locator: tuple[str, str] | None
     ):
         self._page = page
         self._web_element = web_element
@@ -31,7 +31,7 @@ class Element(ElementInterface):
 
         return ElementShould(self._page, self, wait_time, ignored_exceptions)
 
-    def click(self, force=False):
+    def click(self, force=False) -> "Element":
         logger.info("Element.click() - Click this element")
 
         if force:
@@ -42,7 +42,7 @@ class Element(ElementInterface):
         else:
             self.web_element.click()
 
-        return self._page
+        return self
 
     def type(self, *args) -> "Element":
         logger.info(
@@ -51,7 +51,7 @@ class Element(ElementInterface):
 
         ActionChains(self._page.webdriver) \
             .move_to_element(self.web_element) \
-            .send_keys(*args)\
+            .send_keys(*args) \
             .perform()
 
         return self

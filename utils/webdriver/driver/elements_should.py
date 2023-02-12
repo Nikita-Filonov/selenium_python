@@ -2,17 +2,18 @@ from selenium.common.exceptions import TimeoutException
 
 from utils.logger import logger
 from utils.types.webdriver.driver.elements import ElementsInterface
+from utils.types.webdriver.driver.elements_should import ElementsShouldInterface
 from utils.types.webdriver.driver.page import PageInterface
 
 
-class ElementsShould:
+class ElementsShould(ElementsShouldInterface):
 
     def __init__(
-        self,
-        page: PageInterface,
-        elements: "ElementsInterface",
-        timeout: int,
-        ignored_exceptions: list = None
+            self,
+            page: PageInterface,
+            elements: "ElementsInterface",
+            timeout: int,
+            ignored_exceptions: list = None
     ):
         self._page = page
         self._elements = elements

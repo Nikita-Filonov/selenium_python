@@ -1,11 +1,12 @@
 from selenium.common.exceptions import TimeoutException
 
 from utils.types.webdriver.driver.element import ElementInterface
+from utils.types.webdriver.driver.element_should import ElementShouldInterface
 from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element_wait import ElementWait
 
 
-class ElementShould:
+class ElementShould(ElementShouldInterface):
 
     def __init__(
             self,

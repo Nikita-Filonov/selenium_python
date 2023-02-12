@@ -5,7 +5,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.types.webdriver.driver.page import PageInterface
-from utils.types.webdriver.driver.waiting import PageWaitInterface, WebDriverUntilMethod
+from utils.types.webdriver.driver.page_wait import PageWaitInterface, WebDriverUntilMethod
 from utils.webdriver.driver.element import Element
 from utils.webdriver.driver.elements import Elements
 

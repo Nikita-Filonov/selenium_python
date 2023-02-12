@@ -16,6 +16,7 @@ from utils.constants.suites import Suite
 class TestCustomersSQL:
     SQL_TRYSQL_URL = f'{UIRoutes.SQL_TRYSQL}?filename=trysql_select_all'
 
+    @allure.id('1')
     @allure.title('Select all customers')
     @pytest.mark.parametrize('text', ['Via Ludovico il Moro 22'])
     @pytest.mark.parametrize('reference_text', ['Via Ludovico il Moro 22'])
@@ -29,6 +30,7 @@ class TestCustomersSQL:
             column=TrySQLPageResultColumn.ADDRESS
         )
 
+    @allure.id('2')
     @allure.title('Filter customers')
     @pytest.mark.parametrize('number_of_records', [6])
     def test_filter_customers(self, try_sql_page: TrySQLPage, number_of_records: int):
@@ -39,6 +41,7 @@ class TestCustomersSQL:
         try_sql_page.run_sql()
         try_sql_page.check_number_of_records(number_of_records)
 
+    @allure.id('3')
     @allure.title('Create customer')
     @pytest.mark.parametrize('create_customer', [CreateCustomer.get_random()])
     def test_create_customer(self, try_sql_page: TrySQLPage, create_customer: CreateCustomer):
@@ -60,13 +63,14 @@ class TestCustomersSQL:
             )
         )
 
+    @allure.id('4')
     @allure.title('Update customer')
-    @pytest.mark.parametrize('customer_id', [1])
+    @pytest.mark.parametrize('customer_id', ['1'])
     @pytest.mark.parametrize('update_customer', [CreateCustomer.get_random()])
     def test_update_customer(
         self,
         try_sql_page: TrySQLPage,
-        customer_id: int,
+        customer_id: str,
         update_customer: CreateCustomer,
     ):
         try_sql_page.visit(self.SQL_TRYSQL_URL)
@@ -80,14 +84,15 @@ class TestCustomersSQL:
         )
         try_sql_page.run_sql()
         try_sql_page.check_result_table_row(
-            expected_texts=(str(customer_id), *update_customer.values()),
+            expected_texts=(customer_id, *update_customer.values()),
             reference_text=customer_id,
             columns=TrySQLPageResultColumn.to_list()
         )
 
+    @allure.id('5')
     @allure.title('Delete customer')
-    @pytest.mark.parametrize('customer_id', [1])
-    def test_delete_customer(self, try_sql_page: TrySQLPage, customer_id: int):
+    @pytest.mark.parametrize('customer_id', ['1'])
+    def test_delete_customer(self, try_sql_page: TrySQLPage, customer_id: str):
         try_sql_page.visit(self.SQL_TRYSQL_URL)
         try_sql_page.fill_sql_editor(
             f'DELETE FROM Customers WHERE CustomerID="{customer_id}";'

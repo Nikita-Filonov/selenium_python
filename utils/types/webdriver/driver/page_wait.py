@@ -12,18 +12,19 @@ WebElementUntilMethod = Callable[[WebElement], bool]
 
 
 class PageWaitInterface(ABC):
+    _page: "PageInterface"
+    _wait: WebDriverWait
+    _webdriver: WebDriver
 
     @abstractmethod
     def __init__(
-        self,
-        page: "PageInterface",
-        webdriver: WebDriver,
-        timeout: int,
-        ignored_exceptions: tuple | None = None
+            self,
+            page: "PageInterface",
+            webdriver: WebDriver,
+            timeout: int,
+            ignored_exceptions: tuple | None = None
     ):
-        self._page: PageInterface
-        self._webdriver: WebDriver
-        self._wait: WebDriverWait
+        ...
 
     @abstractmethod
     def until(self, method: WebDriverUntilMethod, message=""):
@@ -35,9 +36,9 @@ class PageWaitInterface(ABC):
 
     @abstractmethod
     def build(
-        self,
-        timeout: int,
-        use_self=False,
-        ignored_exceptions: list = None
+            self,
+            timeout: int,
+            use_self=False,
+            ignored_exceptions: list = None
     ) -> Union[WebDriverWait, "PageWaitInterface"]:
         ...

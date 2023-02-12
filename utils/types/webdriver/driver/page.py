@@ -9,7 +9,7 @@ from config import UIConfig
 if TYPE_CHECKING:
     from utils.types.webdriver.driver.element import ElementInterface
     from utils.types.webdriver.driver.elements import ElementsInterface
-    from utils.types.webdriver.driver.waiting import PageWaitInterface
+    from utils.types.webdriver.driver.page_wait import PageWaitInterface
 
 
 class PageInterface(ABC):

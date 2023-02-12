@@ -104,7 +104,7 @@ class TrySQLPage(BasePage):
     @allure.step('Checking that result table row have values "{expected_texts}"')
     def check_result_table_row(
         self,
-        expected_texts: list[str | int],
+        expected_texts: tuple[str, ...],
         reference_text: str,
         columns: list[TrySQLPageResultColumn]
     ):
