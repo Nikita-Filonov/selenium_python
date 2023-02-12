@@ -67,7 +67,7 @@ class Page(PageInterface):
         return self
 
     def wait_for_alive(self) -> WebDriver:
-        logger.info("Page.wait_for_alive() - PageWait until driver stable")
+        logger.info("Page.wait_for_alive() - Page wait until driver stable")
 
         try:
             return self.webdriver
