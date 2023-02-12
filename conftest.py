@@ -1,8 +1,8 @@
-import allure
 import pytest
 
 from config import UIConfig
 from utils.webdriver.driver.page import Page
+from utils.webdriver.driver.utils import attach_screenshot
 
 
 @pytest.fixture(scope='function')
@@ -13,14 +13,10 @@ def ui_config() -> UIConfig:
 @pytest.fixture(scope='function')
 def page(request: pytest.FixtureRequest, ui_config: UIConfig) -> Page:
     page_client = Page(ui_config)
+    page_client.wait_for_alive()
     yield page_client
 
     if ui_config.logging.screenshots_on:
-        screenshot = page_client.screenshot(
-            f'screenshots/{request.node.name}.png'
-        )
-        allure.attach.file(
-            screenshot, name='Page', attachment_type=allure.attachment_type.PNG
-        )
+        attach_screenshot(page, request.node.name)
 
     page_client.quit()

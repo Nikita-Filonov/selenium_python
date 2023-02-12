@@ -1,7 +1,10 @@
+from time import sleep
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webdriver import WebDriver, WebElement
 from selenium.webdriver.support.wait import WebDriverWait
+from urllib3.exceptions import MaxRetryError
 
 from config import UIConfig
 from utils.types.webdriver.driver.page import PageInterface
@@ -61,6 +64,13 @@ class Page(PageInterface):
         self.webdriver.refresh()
         return self
 
+    def wait_for_alive(self) -> WebDriver:
+        try:
+            return self.webdriver
+        except MaxRetryError:
+            sleep(0.5)
+            self.wait_for_alive()
+
     def get_xpath(self, xpath: str, timeout: int = None) -> Element:
         by = By.XPATH
 
@@ -76,17 +86,19 @@ class Page(PageInterface):
 
     def find_xpath(self, xpath: str, timeout: int = None) -> Elements:
         by = By.XPATH
+        elements: list[WebElement] = []
 
         try:
             if timeout == 0:
                 elements = self.webdriver.find_elements(by, xpath)
             else:
                 elements = self.wait(timeout).until(
-                    lambda x: x.find_elements(
-                        by, xpath), f"Could not find an element with xpath: `{xpath}`"
+                    lambda x: x.find_elements(by, xpath),
+                    f"Could not find an element with xpath: `{xpath}`"
                 )
         except TimeoutException:
-            elements = []
+            pass
+
         return Elements(self, elements, locator=(by, xpath))
 
     def wait(

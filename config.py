@@ -1,4 +1,6 @@
-from pydantic import BaseModel, BaseSettings, Field
+from functools import lru_cache
+
+from pydantic import BaseModel, BaseSettings, DirectoryPath, Field
 
 from utils.webdriver.factory.browser import Browser
 
@@ -32,6 +34,9 @@ class DriverConfig(BaseSettings):
 class LoggingConfig(BaseSettings):
     log_level: str = "INFO"
     screenshots_on: bool = Field(default=True, env="SCREENSHOTS_ON")
+    screenshots_dir: DirectoryPath = Field(
+        default='./screenshots', env="SCREENSHOTS_DIR"
+    )
 
     class Config:
         env_file = '.env'
@@ -55,3 +60,8 @@ class UIConfig(BaseSettings):
     class Config:
         env_file = '.env'
         env_file_encoding = 'utf-8'
+
+
+@lru_cache()
+def get_ui_config() -> UIConfig:
+    return UIConfig()
