@@ -25,8 +25,8 @@ If you want to run auto tests locally, make sure to install `python 3.10`
 
 ```
 pip install virtualenv
-virtualenv venv
-source venv/bin/activate
+virtualenv .venv
+source .venv/bin/activate
 
 pip install -r requirements.txt
 
