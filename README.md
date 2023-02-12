@@ -9,7 +9,7 @@ git clone https://github.com/Nikita-Filonov/selenium_python.git
 cd selenium_python
 ```
 
-**Setup env**
+## Setup env
 
 Make sure to create `.env` file locally. You can copy all content from `.env.example`
 
@@ -19,7 +19,7 @@ BASE_URL="https://www.w3schools.com"
 SCREENSHOTS_ON=true
 ```
 
-**Running locally**
+## Running locally
 
 If you want to run auto tests locally, make sure to install `python 3.10`
 
@@ -42,7 +42,7 @@ BASE_URL="https://www.w3schools.com"
 SCREENSHOTS_ON=true
 ```
 
-**Running in docker**
+## Running in docker
 
 Assume you have `docker`, `docker-compose` installed
 
@@ -53,7 +53,7 @@ docker-compose up
 As artifact of the auto tests running in the docker container
 you will get `allure-results` folder
 
-**Create report**
+## Create report
 
 Run report server locally
 
