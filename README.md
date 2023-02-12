@@ -31,6 +31,15 @@ pip install -r requirements.txt
 python -m pytest -m ui --alluredir=./allure-results
 ```
 
+For local run `.env` file should looks like
+
+```
+REMOTE_URL="http://localhost:4444/wd/hub" # if you want to send auto tests to selenium hub, make sure docker-compose running
+# REMOTE_URL= # if you want to run auto tests on you machine
+BASE_URL="https://www.w3schools.com"
+SCREENSHOTS_ON=true
+```
+
 **Running in docker**
 
 Assume you have `docker`, `docker-compose` installed
