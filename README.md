@@ -2,7 +2,7 @@
 
 [Demo allure report](https://nikita-filonov.github.io/selenium_python/)
 
-**Install project**
+## Install project
 
 ```
 git clone https://github.com/Nikita-Filonov/selenium_python.git
