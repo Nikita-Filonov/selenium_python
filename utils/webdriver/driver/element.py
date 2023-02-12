@@ -8,6 +8,7 @@ from utils.webdriver.driver.element_should import ElementShould
 
 
 class Element(ElementInterface):
+    """Element API: Represents a single DOM webelement and includes the commands to work with it."""
 
     def __init__(
             self,
@@ -24,6 +25,7 @@ class Element(ElementInterface):
         return self._web_element
 
     def should(self, timeout: int = 0, ignored_exceptions: list = None) -> ElementShould:
+        """A collection of expectations for this element"""
         if timeout:
             wait_time = timeout
         else:
@@ -32,6 +34,7 @@ class Element(ElementInterface):
         return ElementShould(self._page, self, wait_time, ignored_exceptions)
 
     def click(self, force=False) -> "Element":
+        """Clicks the element"""
         logger.info("Element.click() - Click this element")
 
         if force:
@@ -45,6 +48,7 @@ class Element(ElementInterface):
         return self
 
     def type(self, *args) -> "Element":
+        """Simulate a user typing keys into the input"""
         logger.info(
             "Element.type() - Type keys `%s` into this element", (args,)
         )
@@ -57,6 +61,7 @@ class Element(ElementInterface):
         return self
 
     def fill(self, *args) -> "Element":
+        """Fill input element with value"""
         logger.info(
             "Element.fill() - Fill value `%s` into this element", (args,)
         )
@@ -65,6 +70,7 @@ class Element(ElementInterface):
         return self
 
     def clear(self) -> "Element":
+        """Clears the text of the input or textarea element"""
         logger.info("Element.clear() - Clear the input of this element")
 
         self.web_element.clear()

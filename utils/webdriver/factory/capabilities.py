@@ -6,7 +6,8 @@ Capabilities = dict[str, str]
 
 
 def build_capabilities(browser: Browser, capabilities: Capabilities | None) -> Capabilities:
-    """Build the capabilities dictionary for the given browser.
+    """
+    Build the capabilities dictionary for the given browser.
 
     Some WebDrivers pass in capabilities directly, but others (ie Chrome) require it be added via the Options object.
 

@@ -26,6 +26,7 @@ class Elements(ElementsInterface):
         return len(self._list)
 
     def is_empty(self) -> bool:
+        """Checks if there are zero elements in the list."""
         return self.length() == 0
 
     def should(self, timeout: int = 0, ignored_exceptions: list = None) -> ElementsShould:

@@ -111,7 +111,8 @@ def build_remote(
     extension_paths: list[str] | None,
     webdriver_kwargs: dict | None,
 ):
-    """Build a RemoteDriver connected to a Grid.
+    """
+    Build a RemoteDriver connected to a Grid.
 
     Args:
         browser: Name of the browser to connect to.

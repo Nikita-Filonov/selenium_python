@@ -16,6 +16,10 @@ from utils.webdriver.factory.factory import build_from_config
 
 
 class Page(PageInterface):
+    """
+    Page interface that representing interactions with page 
+    like finding locators, opening url etc.
+    """
 
     def __init__(self, config: UIConfig):
         self.config = config
@@ -24,6 +28,7 @@ class Page(PageInterface):
         self._wait = None
 
     def init_webdriver(self) -> WebDriver:
+        """Initialize WebDriver using the UIConfig"""
         self._webdriver = build_from_config(self.config)
 
         self._wait = PageWait(
@@ -49,9 +54,11 @@ class Page(PageInterface):
         return self.init_webdriver() if self._webdriver is None else self._webdriver
 
     def url(self) -> str:
+        """Get the current page's URL"""
         return self.webdriver.current_url
 
     def visit(self, url: str) -> "Page":
+        """Navigate to the given URL"""
         normalized_url = url if url.startswith(
             'http') else (self.config.base_url + url)
 
@@ -61,12 +68,14 @@ class Page(PageInterface):
         return self
 
     def reload(self) -> "Page":
+        """Reload (aka refresh) the current window"""
         logger.info("Page.reload() - Reloading the page")
 
         self.webdriver.refresh()
         return self
 
-    def wait_for_alive(self) -> WebDriver:
+    def wait_until_stable(self) -> WebDriver:
+        """Waits until webdriver will be stable"""
         logger.info("Page.wait_for_alive() - Page wait until driver stable")
 
         try:
@@ -76,6 +85,13 @@ class Page(PageInterface):
             self.wait_for_alive()
 
     def get_xpath(self, xpath: str, timeout: int = None) -> Element:
+        """
+        Finds the DOM element that match the XPATH selector.
+
+        * If `timeout=None` (default), use the default wait_time.
+        * If `timeout > 0`, override the default wait_time.
+        * If `timeout=0`, poll the DOM immediately without any waiting.
+        """
         logger.info(
             "Page.get_xpath() - Get the element with xpath: `%s`", xpath
         )
@@ -93,6 +109,13 @@ class Page(PageInterface):
         return Element(self, element, locator=(by, xpath))
 
     def find_xpath(self, xpath: str, timeout: int = None) -> Elements:
+        """
+        Finds the DOM elements that match the XPATH selector.
+
+        * If `timeout=None` (default), use the default wait_time.
+        * If `timeout > 0`, override the default wait_time.
+        * If `timeout=0`, poll the DOM immediately without any waiting.
+        """
         by = By.XPATH
         elements: list[WebElement] = []
 
@@ -116,12 +139,14 @@ class Page(PageInterface):
     def wait(
             self, timeout: int = None, use_self: bool = False, ignored_exceptions: list = None
     ) -> WebDriverWait | PageWait:
+        """The Wait object with the given timeout in seconds"""
         if timeout:
             return self._wait.build(timeout, use_self, ignored_exceptions)
 
         return self._wait.build(self.config.driver.wait_time, use_self, ignored_exceptions)
 
     def quit(self):
+        """Quits the driver"""
         logger.info(
             "Page.quit() - Quit page and close all windows from the browser session"
         )
@@ -129,18 +154,21 @@ class Page(PageInterface):
         self.webdriver.quit()
 
     def screenshot(self, filename: str) -> str:
+        """Take a screenshot of the current Window"""
         logger.info("Page.screenshot() - Save screenshot to: `%s`", filename)
 
         self.webdriver.save_screenshot(filename)
         return filename
 
     def maximize_window(self) -> "Page":
+        """Maximizes the current Window"""
         logger.info("Page.maximize_window() - Maximize browser window")
 
         self.webdriver.maximize_window()
         return self
 
     def execute_script(self, script: str, *args) -> "Page":
+        """Executes javascript in the current window or frame"""
         logger.info(
             "Page.execute_script() - Execute javascript `%s` into the Browser", script
         )
@@ -149,6 +177,7 @@ class Page(PageInterface):
         return self
 
     def set_page_load_timeout(self, timeout: int) -> "Page":
+        """Set the amount of time to wait for a page load to complete before throwing an error"""
         logger.info(
             "Page.set_page_load_timeout() - Set page load timeout: `%s`", timeout
         )
@@ -157,6 +186,7 @@ class Page(PageInterface):
         return self
 
     def viewport(self, width: int, height: int, orientation: str = "portrait") -> "Page":
+        """Control the size and orientation of the current context's browser window"""
         logger.info(
             "Page.viewport() - Set viewport width: `%s`, height: `%s`, orientation: `%s`",
             width, height, orientation

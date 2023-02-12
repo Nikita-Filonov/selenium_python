@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Union, TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 from selenium.webdriver.support.wait import WebDriverWait
 

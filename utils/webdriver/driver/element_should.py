@@ -7,6 +7,7 @@ from utils.webdriver.driver.element_wait import ElementWait
 
 
 class ElementShould(ElementShouldInterface):
+    """ElementShould API: Commands (aka Expectations) for the current Element"""
 
     def __init__(
             self,
@@ -22,6 +23,7 @@ class ElementShould(ElementShouldInterface):
         )
 
     def be_clickable(self) -> ElementInterface:
+        """An expectation that the element is displayed and enabled so you can click it"""
         try:
             value = self._wait.until(
                 lambda e: e.is_displayed() and e.is_enabled()
@@ -34,6 +36,7 @@ class ElementShould(ElementShouldInterface):
         raise AssertionError("Element was not clickable")
 
     def be_hidden(self) -> ElementInterface:
+        """An expectation that the element is not displayed but still in the DOM (aka hidden)"""
         try:
             value = self._wait.until(lambda e: e and not e.is_displayed())
         except TimeoutException:
@@ -44,6 +47,7 @@ class ElementShould(ElementShouldInterface):
         raise AssertionError("Element was not hidden")
 
     def be_visible(self) -> ElementInterface:
+        """An expectation that the element is displayed"""
         try:
             value = self._wait.until(lambda e: e and e.is_displayed())
         except TimeoutException:
@@ -55,6 +59,7 @@ class ElementShould(ElementShouldInterface):
         raise AssertionError("Element was not visible")
 
     def have_text(self, text: str, case_sensitive=True) -> "ElementInterface":
+        """An expectation that the element has the given text"""
         try:
             if case_sensitive:
                 value = self._wait.until(lambda e: e.text == text)

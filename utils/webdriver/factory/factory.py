@@ -7,6 +7,15 @@ from utils.webdriver.factory.builders import (build_chrome, build_firefox,
 
 
 def build_from_config(config: UIConfig) -> WebDriver:
+    """
+    The "main" method for building a WebDriver using UIConfig.
+    Args:
+        config: UIConfig from config.py
+    Usage:
+        driver = webdriver_factory.build_from_config(config)
+    Returns:
+        An instance of WebDriver.
+    """
     browser = config.driver.browser
     remote_url = config.driver.remote_url
 

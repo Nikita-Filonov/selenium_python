@@ -13,7 +13,7 @@ def ui_config() -> UIConfig:
 @pytest.fixture(scope='function')
 def page(request: pytest.FixtureRequest, ui_config: UIConfig) -> Page:
     page_client = Page(ui_config)
-    page_client.wait_for_alive()
+    page_client.wait_until_stable()
     yield page_client
 
     if ui_config.logging.screenshots_on:

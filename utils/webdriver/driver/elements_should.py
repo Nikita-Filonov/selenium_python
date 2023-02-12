@@ -7,6 +7,7 @@ from utils.types.webdriver.driver.page import PageInterface
 
 
 class ElementsShould(ElementsShouldInterface):
+    """ElementsShould API: Commands (aka Expectations) for the current list of Elements"""
 
     def __init__(
             self,
@@ -24,6 +25,9 @@ class ElementsShould(ElementsShouldInterface):
         )
 
     def have_length(self, length: int) -> bool:
+        """
+        An expectation that the number of elements in the list is equal to the given length
+        """
         logger.info("Elements.should().have_length(): %s", length)
 
         try:
@@ -43,6 +47,7 @@ class ElementsShould(ElementsShouldInterface):
         raise AssertionError(f"Length of elements was not equal to {length}")
 
     def not_be_empty(self) -> ElementsInterface:
+        """An expectation that the list has at least one element"""
         from utils.webdriver.driver.elements import Elements
 
         logger.info("Elements.should().not_be_empty()")
