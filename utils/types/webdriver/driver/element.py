@@ -4,7 +4,8 @@ from typing import TYPE_CHECKING
 from selenium.webdriver.remote.webdriver import WebElement
 
 if TYPE_CHECKING:
-    from utils.types.webdriver.driver.element_should import ElementShouldInterface
+    from utils.types.webdriver.driver.element_should import \
+        ElementShouldInterface
 
 
 class ElementInterface(ABC):

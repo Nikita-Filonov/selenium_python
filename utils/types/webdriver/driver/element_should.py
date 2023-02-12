@@ -2,9 +2,9 @@ from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from utils.types.webdriver.driver.page import PageInterface
     from utils.types.webdriver.driver.element import ElementInterface
     from utils.types.webdriver.driver.element_wait import ElementWaitInterface
+    from utils.types.webdriver.driver.page import PageInterface
 
 
 class ElementShouldInterface(ABC):

@@ -2,7 +2,8 @@ from selenium.common.exceptions import TimeoutException
 
 from utils.logger import logger
 from utils.types.webdriver.driver.elements import ElementsInterface
-from utils.types.webdriver.driver.elements_should import ElementsShouldInterface
+from utils.types.webdriver.driver.elements_should import \
+    ElementsShouldInterface
 from utils.types.webdriver.driver.page import PageInterface
 
 
