@@ -17,6 +17,6 @@ def page(request: pytest.FixtureRequest, ui_config: UIConfig) -> Page:
     yield page_client
 
     if ui_config.logging.screenshots_on:
-        attach_screenshot(page, request.node.name)
+        attach_screenshot(page_client, request.node.name)
 
     page_client.quit()
