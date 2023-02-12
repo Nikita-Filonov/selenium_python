@@ -45,7 +45,7 @@ class TrySQLPage(BasePage):
         self.query_result_text = Text(
             page,
             locator='//div[@id="divResultSQL"]//div',
-            name="Insert result"
+            name="Query result"
         )
         self.number_of_records_title = Title(
             page,
