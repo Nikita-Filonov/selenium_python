@@ -5,7 +5,7 @@ from utils.webdriver.driver.page import Page
 from utils.webdriver.driver.utils import attach_screenshot
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='session')
 def ui_config() -> UIConfig:
     return UIConfig()
 
