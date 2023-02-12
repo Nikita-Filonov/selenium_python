@@ -50,7 +50,7 @@ Assume you have `docker`, `docker-compose` installed
 docker-compose up
 ```
 
-As artifact of the auto tests running in the docker container
+As artifact of the auto tests run in the docker container
 you will get `allure-results` folder
 
 ## Create report
