@@ -1,5 +1,7 @@
 # Selenium python
 
+(Demo allure report)[https://nikita-filonov.github.io/selenium_python/]
+
 **Install project**
 
 ```
