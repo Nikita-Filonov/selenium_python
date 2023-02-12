@@ -39,12 +39,21 @@ Assume you have `docker`, `docker-compose` installed
 docker-compose up
 ```
 
+As artifact of the auto tests running in the docker container
+you will get `allure-results` folder
+
 **Create report**
+
+Run report server locally
 
 ```
 allure serve
+```
 
-or
+Or generate report
 
+```
 allure generate
 ```
+
+This command will create folder `allure-report`. Open `allure-report` folder and open `index.html` file
