@@ -7,10 +7,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from urllib3.exceptions import MaxRetryError
 
 from config import UIConfig
+from utils.logger import logger
 from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element import Element
 from utils.webdriver.driver.elements import Elements
-from utils.webdriver.driver.waiting import Waiting
+from utils.webdriver.driver.page_wait import PageWait
 from utils.webdriver.factory.factory import build_from_config
 
 
@@ -25,7 +26,7 @@ class Page(PageInterface):
     def init_webdriver(self) -> WebDriver:
         self._webdriver = build_from_config(self.config)
 
-        self._wait = Waiting(
+        self._wait = PageWait(
             self, self._webdriver, self.config.driver.wait_time, ignored_exceptions=None
         )
 
@@ -47,9 +48,6 @@ class Page(PageInterface):
         """The current instance of Selenium's `WebDriver` API."""
         return self.init_webdriver() if self._webdriver is None else self._webdriver
 
-    def title(self) -> str:
-        return self.webdriver.title
-
     def url(self) -> str:
         return self.webdriver.current_url
 
@@ -57,14 +55,20 @@ class Page(PageInterface):
         normalized_url = url if url.startswith(
             'http') else (self.config.base_url + url)
 
+        logger.info("Page.visit() - Visit URL: `%s`", normalized_url)
+
         self.webdriver.get(normalized_url)
         return self
 
     def reload(self) -> "Page":
+        logger.info("Page.reload() - Reloading the page")
+
         self.webdriver.refresh()
         return self
 
     def wait_for_alive(self) -> WebDriver:
+        logger.info("Page.wait_for_alive() - PageWait until driver stable")
+
         try:
             return self.webdriver
         except MaxRetryError:
@@ -72,6 +76,10 @@ class Page(PageInterface):
             self.wait_for_alive()
 
     def get_xpath(self, xpath: str, timeout: int = None) -> Element:
+        logger.info(
+            "Page.get_xpath() - Get the element with xpath: `%s`", xpath
+        )
+
         by = By.XPATH
 
         if timeout == 0:
@@ -88,6 +96,10 @@ class Page(PageInterface):
         by = By.XPATH
         elements: list[WebElement] = []
 
+        logger.info(
+            "Page.find_xpath() - Get the elements with xpath: `%s`", xpath
+        )
+
         try:
             if timeout == 0:
                 elements = self.webdriver.find_elements(by, xpath)
@@ -103,32 +115,53 @@ class Page(PageInterface):
 
     def wait(
             self, timeout: int = None, use_self: bool = False, ignored_exceptions: list = None
-    ) -> WebDriverWait | Waiting:
+    ) -> WebDriverWait | PageWait:
         if timeout:
             return self._wait.build(timeout, use_self, ignored_exceptions)
 
         return self._wait.build(self.config.driver.wait_time, use_self, ignored_exceptions)
 
     def quit(self):
+        logger.info(
+            "Page.quit() - Quit page and close all windows from the browser session"
+        )
+
         self.webdriver.quit()
 
     def screenshot(self, filename: str) -> str:
+        logger.info("Page.screenshot() - Save screenshot to: `%s`", filename)
+
         self.webdriver.save_screenshot(filename)
         return filename
 
     def maximize_window(self) -> "Page":
+        logger.info("Page.maximize_window() - Maximize browser window")
+
         self.webdriver.maximize_window()
         return self
 
     def execute_script(self, script: str, *args) -> "Page":
+        logger.info(
+            "Page.execute_script() - Execute javascript `%s` into the Browser", script
+        )
+
         self.webdriver.execute_script(script, *args)
         return self
 
     def set_page_load_timeout(self, timeout: int) -> "Page":
+        logger.info(
+            "Page.set_page_load_timeout() - Set page load timeout: `%s`", timeout
+        )
+
         self.webdriver.set_page_load_timeout(timeout)
         return self
 
     def viewport(self, width: int, height: int, orientation: str = "portrait") -> "Page":
+        logger.info(
+            "Page.viewport() - Set viewport width: `%s`, height: `%s`, orientation: `%s`",
+            width, height, orientation
+        )
+
         if orientation == "portrait":
             self.webdriver.set_window_size(width, height)
         elif orientation == "landscape":

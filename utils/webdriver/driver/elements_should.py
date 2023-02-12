@@ -1,11 +1,11 @@
 from selenium.common.exceptions import TimeoutException
 
-from utils.types.webdriver.driver.page import PageInterface
+from utils.logger import logger
 from utils.types.webdriver.driver.elements import ElementsInterface
+from utils.types.webdriver.driver.page import PageInterface
 
 
 class ElementsShould:
-    """ElementsShould API: Commands (aka Expectations) for the current list of Elements."""
 
     def __init__(
         self,
@@ -23,6 +23,8 @@ class ElementsShould:
         )
 
     def have_length(self, length: int) -> bool:
+        logger.info("Elements.should().have_length(): %s", length)
+
         try:
             if self._elements.length() == length:
                 return True
@@ -41,6 +43,8 @@ class ElementsShould:
 
     def not_be_empty(self) -> ElementsInterface:
         from utils.webdriver.driver.elements import Elements
+
+        logger.info("Elements.should().not_be_empty()")
 
         try:
             if not self._elements.is_empty():

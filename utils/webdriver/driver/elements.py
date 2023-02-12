@@ -1,14 +1,12 @@
 from selenium.webdriver.remote.webdriver import WebElement
 
+from utils.types.webdriver.driver.element import ElementInterface
 from utils.types.webdriver.driver.elements import ElementsInterface
 from utils.types.webdriver.driver.page import PageInterface
-from utils.types.webdriver.driver.element import ElementInterface
-
 from utils.webdriver.driver.elements_should import ElementsShould
 
 
 class Elements(ElementsInterface):
-    """Elements API: Represents a list of DOM webelements and includes commands to work with them."""
 
     def __init__(
         self,
@@ -25,21 +23,12 @@ class Elements(ElementsInterface):
         self.locator = locator
 
     def length(self) -> int:
-        """The number of elements in the list."""
         return len(self._list)
 
     def is_empty(self) -> bool:
-        """Checks if there are zero elements in the list."""
         return self.length() == 0
 
     def should(self, timeout: int = 0, ignored_exceptions: list = None) -> ElementsShould:
-        """A collection of expectations for this list of elements.
-
-        Examples:
-        ```
-            app_web_driver.find("option").should().not_be_empty()
-        ```
-        """
         if timeout:
             wait_time = timeout
         else:

@@ -50,6 +50,7 @@ class ElementShould:
 
         if value:
             return self._element
+
         raise AssertionError("Element was not visible")
 
     def have_text(self, text: str, case_sensitive=True) -> "ElementInterface":

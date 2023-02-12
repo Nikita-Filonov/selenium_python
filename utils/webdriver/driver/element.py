@@ -1,10 +1,8 @@
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebElement
 
+from utils.logger import logger
 from utils.types.webdriver.driver.element import ElementInterface
-from utils.types.webdriver.driver.elements import ElementsInterface
 from utils.types.webdriver.driver.page import PageInterface
 from utils.webdriver.driver.element_should import ElementShould
 
@@ -34,6 +32,8 @@ class Element(ElementInterface):
         return ElementShould(self._page, self, wait_time, ignored_exceptions)
 
     def click(self, force=False):
+        logger.info("Element.click() - Click this element")
+
         if force:
             self._page.webdriver.execute_script(
                 "arguments[0].click()",
@@ -45,6 +45,10 @@ class Element(ElementInterface):
         return self._page
 
     def type(self, *args) -> "Element":
+        logger.info(
+            "Element.type() - Type keys `%s` into this element", (args,)
+        )
+
         ActionChains(self._page.webdriver) \
             .move_to_element(self.web_element) \
             .send_keys(*args)\
@@ -53,39 +57,15 @@ class Element(ElementInterface):
         return self
 
     def fill(self, *args) -> "Element":
+        logger.info(
+            "Element.fill() - Fill value `%s` into this element", (args,)
+        )
+
         self.web_element.send_keys(args)
         return self
 
     def clear(self) -> "Element":
+        logger.info("Element.clear() - Clear the input of this element")
+
         self.web_element.clear()
         return self
-
-    def get_xpath(self, xpath: str, timeout: int = None) -> "Element":
-        by = By.XPATH
-
-        if timeout == 0:
-            elements = self.web_element.find_element(by, xpath)
-        else:
-            elements = self._page.wait(timeout).until(
-                lambda _: self.web_element.find_element(by, xpath),
-                f"Could not find any elements with the xpath: `{xpath}`",
-            )
-
-        return Element(self._page, elements, locator=(by, xpath))
-
-    def find_xpath(self, xpath: str, timeout: int = None) -> "ElementsInterface":
-        from utils.webdriver.driver.elements import Elements
-
-        by = By.XPATH
-
-        try:
-            if timeout == 0:
-                elements = self.web_element.find_elements(by, xpath)
-            else:
-                elements = self._page.wait(timeout).until(
-                    lambda _: self.web_element.find_elements(by, xpath),
-                    f"Could not find any elements with the xpath: `{xpath}`",
-                )
-        except TimeoutException:
-            elements = []
-        return Elements(self._page, elements, locator=(by, xpath))

@@ -9,7 +9,7 @@ from config import UIConfig
 if TYPE_CHECKING:
     from utils.types.webdriver.driver.element import ElementInterface
     from utils.types.webdriver.driver.elements import ElementsInterface
-    from utils.types.webdriver.driver.waiting import WaitingInterface
+    from utils.types.webdriver.driver.waiting import PageWaitInterface
 
 
 class PageInterface(ABC):
@@ -30,15 +30,11 @@ class PageInterface(ABC):
         timeout: int = None,
         use_self: bool = False,
         ignored_exceptions: list = None
-    ) -> Union[WebDriverWait, "WaitingInterface"]:
+    ) -> Union[WebDriverWait, "PageWaitInterface"]:
         ...
 
     @abstractmethod
     def init_webdriver(self) -> WebDriver:
-        ...
-
-    @abstractmethod
-    def title(self) -> str:
         ...
 
     @abstractmethod

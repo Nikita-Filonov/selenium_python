@@ -5,8 +5,6 @@
   "python.formatting.provider": "autopep8",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
-  "python.linting.pylintArgs": ["--load-plugins=pylint_django"],
-  "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[python]": {
     "editor.defaultFormatter": "ms-python.python"

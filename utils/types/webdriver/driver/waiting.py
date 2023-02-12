@@ -11,7 +11,7 @@ WebDriverUntilMethod = Callable[[WebDriver], bool]
 WebElementUntilMethod = Callable[[WebElement], bool]
 
 
-class WaitingInterface(ABC):
+class PageWaitInterface(ABC):
 
     @abstractmethod
     def __init__(
@@ -39,5 +39,5 @@ class WaitingInterface(ABC):
         timeout: int,
         use_self=False,
         ignored_exceptions: list = None
-    ) -> Union[WebDriverWait, "WaitingInterface"]:
+    ) -> Union[WebDriverWait, "PageWaitInterface"]:
         ...

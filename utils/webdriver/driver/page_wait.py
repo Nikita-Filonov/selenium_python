@@ -5,12 +5,12 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
 from utils.types.webdriver.driver.page import PageInterface
-from utils.types.webdriver.driver.waiting import WaitingInterface, WebDriverUntilMethod
+from utils.types.webdriver.driver.waiting import PageWaitInterface, WebDriverUntilMethod
 from utils.webdriver.driver.element import Element
 from utils.webdriver.driver.elements import Elements
 
 
-class Waiting(WaitingInterface):
+class PageWait(PageWaitInterface):
     def __init__(
             self,
             page: PageInterface,
@@ -50,8 +50,8 @@ class Waiting(WaitingInterface):
 
     def build(
             self, timeout: int, use_self=False, ignored_exceptions: list = None
-    ) -> Union[WebDriverWait, "Waiting"]:
+    ) -> Union[WebDriverWait, "PageWait"]:
         if use_self:
-            return Waiting(self._page, self._webdriver, timeout, ignored_exceptions)
+            return PageWait(self._page, self._webdriver, timeout, ignored_exceptions)
 
         return WebDriverWait(self._webdriver, timeout, ignored_exceptions=ignored_exceptions)
