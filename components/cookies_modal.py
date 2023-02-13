@@ -1,6 +1,8 @@
 import allure
+from selenium.common.exceptions import TimeoutException
 
 from page_factory.button import Button
+from utils.logger import logger
 from utils.webdriver.driver.page import Page
 
 
@@ -19,5 +21,8 @@ class CookiesModal:
 
     @allure.step('Accepting all cookies')
     def accept_cookies(self):
-        if self.accept_button.is_displayed() and self.customize_button.is_displayed():
-            self.accept_button.click()
+        try:
+            if self.accept_button.is_displayed() and self.customize_button.is_displayed():
+                self.accept_button.click()
+        except TimeoutException:
+            logger.error('Cookies modal did not appear')
