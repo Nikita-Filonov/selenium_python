@@ -76,13 +76,13 @@ class Page(PageInterface):
 
     def wait_until_stable(self) -> WebDriver:
         """Waits until webdriver will be stable"""
-        logger.info("Page.wait_for_alive() - Page wait until driver stable")
+        logger.info("Page.wait_until_stable() - Page wait until driver stable")
 
         try:
             return self.webdriver
         except MaxRetryError:
             sleep(0.5)
-            self.wait_for_alive()
+            self.wait_until_stable()
 
     def get_xpath(self, xpath: str, timeout: int = None) -> Element:
         """

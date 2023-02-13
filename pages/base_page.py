@@ -1,15 +1,18 @@
 import allure
 
+from components.cookies_modal import CookiesModal
 from utils.webdriver.driver.page import Page
 
 
 class BasePage:
     def __init__(self, page: Page) -> None:
         self.page = page
+        self.cookies_modal = CookiesModal(page)
 
-    def visit(self, url: str) -> Page:
+    def visit(self, url: str) -> None:
         with allure.step(f'Opening the url "{url}"'):
-            return self.page.visit(url)
+            self.page.visit(url)
+            self.cookies_modal.accept_cookies()
 
     def reload(self) -> Page:
         page_url = self.page.url()

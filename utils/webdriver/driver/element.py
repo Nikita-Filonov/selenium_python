@@ -75,3 +75,12 @@ class Element(ElementInterface):
 
         self.web_element.clear()
         return self
+
+    def is_displayed(self) -> bool:
+        """Check that this element is displayed"""
+
+        logger.info(
+            "Element.is_displayed() - Check if this element is displayed"
+        )
+
+        return self.web_element.is_displayed()

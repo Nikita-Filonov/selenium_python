@@ -52,3 +52,8 @@ class Component:
                 element.should().have_text(text)
             except StaleElementReferenceException:
                 self.should_have_text(text, **kwargs)
+
+    def is_displayed(self, **kwargs) -> bool:
+        with allure.step(f'Checking if {self.type_of} "{self.name}" is visible'):
+            element = self.get_element(**kwargs)
+            return element.is_displayed()

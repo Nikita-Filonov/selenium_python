@@ -33,3 +33,7 @@ class ElementInterface(ABC):
     @abstractmethod
     def clear(self) -> "ElementInterface":
         ...
+
+    @abstractmethod
+    def is_displayed(self) -> bool:
+        ...
